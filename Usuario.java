@@ -14,34 +14,15 @@ public abstract class Usuario {
     }
 
     //Setters
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+    protected abstract void setNombre(String nombre);
+    protected abstract void setCorreo(String correo);
+    protected abstract void setContrasena(String contrasena);
+    protected abstract void setFechaNacimiento(String fechaNacimiento);
 
     //Getters
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }    
+    protected abstract String getNombre();
+    protected abstract String getCorreo();
+    protected abstract String getFechaNacimiento();
+    protected abstract String getContrasena();
     
 }
