@@ -97,6 +97,14 @@ public class Comprador extends Usuario {
     public String getContrasena(){
         return this.contrasena;
     }
+    @Override
+    public String toString() {
+        return "Comprador [ubicacionDeseada=" + ubicacionDeseada + ", rentaCompra=" + rentaCompra + ", presupuesto="
+                + presupuesto + ", tipoViviendaDeseado=" + tipoViviendaDeseado + ", cantBanosDeseados="
+                + cantBanosDeseados + ", compartirU=" + compartirU + ", cuartoCompartido=" + cuartoCompartido
+                + ", serviciosIncluidos=" + serviciosIncluidos + "]";
+    }
+    
     
     
 
