@@ -16,6 +16,9 @@ public class Dormbnb {
         ArrayList<Comprador> compradores = new ArrayList<>();
         ArrayList<Vendedor> vendedores = new ArrayList<>();
 
+        //hash maker
+        MD5 MD5Hash = new MD5();
+
         // Crear un escáner para leer la entrada del usuario
         Scanner scanner = new Scanner(System.in);
 
@@ -95,7 +98,8 @@ public class Dormbnb {
                     if (compradores.get(i).getCorreo() == correo) {
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
-                        if ((compradores.get(i).getContrasena()) == getMD5(contrasena)) {
+                        contrasena = MD5Hash.getMd5(contrasena); 
+                        if ((compradores.get(i).getContrasena()) == contrasena ) {
                             System.out.println("Contrasena correcta");
                             } else {
                             System.out.println("Contrasena Incorrecta");
@@ -104,7 +108,8 @@ public class Dormbnb {
                     if (compradores.get(j).getCorreo() == correo) {
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
-                        if ((compradores.get(j).getContrasena()) == getMD5(contrasena)) {
+                        contrasena = MD5Hash.getMd5(contrasena);
+                        if ((compradores.get(j).getContrasena()) == contrasena) {
                             System.out.println("Contrasena correcta");
                             } else {
                             System.out.println("Contrasena Incorrecta");
@@ -124,3 +129,4 @@ public class Dormbnb {
         }
     }
 }
+

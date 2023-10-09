@@ -56,7 +56,7 @@ public class CSVreader {
         //letor csv
         try (FileWriter writer = new FileWriter(archivoCSV)) {
             
-            writer.write("id_curso,id_sede,nombre_curso,horario,duracion,dias,cantidad_estudiantes,salon_asignado,edificio\n");
+            writer.write("nombre,correo,contrasena,fechaNacimiento,Ubicaciondeseada,RentaCompra,Presupuesto,TipoViviendaDes,CantBanos,CuartoComp,ServiciosIncluidos\n");
 
             for (int i = 0; i <compradores.size(); i++) {
             writer.write(compradores.get(i).getNombre()+","+
