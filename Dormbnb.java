@@ -1,8 +1,9 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Dormbnb {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException{
         System.out.println("***********************************************************");
         System.out.println("*  __        _______ _     ____ ___  __  __ _____ _ _ _   *");
         System.out.println("*  \\ \\      / / ____| |   / ___/ _ \\|  \\/  | ____| | | |  *");
@@ -90,9 +91,26 @@ public class Dormbnb {
                 // El usuario desea iniciar sesión
                 System.out.println("Ingresa tu correo electrónico:");
                 String correo = scanner.next();
-                System.out.println("Ingresa tu contraseña:");
-                String contrasena = scanner.next();
-
+                for (int i = 0; i <compradores.size(); i++) {
+                    if (compradores.get(i).getCorreo() == correo) {
+                        System.out.println("Ingresa tu contraseña:");
+                        String contrasena = scanner.next();
+                        if ((compradores.get(i).getContrasena()) == getMD5(contrasena)) {
+                            System.out.println("Contrasena correcta");
+                            } else {
+                            System.out.println("Contrasena Incorrecta");
+                }}}
+                for (int j = 0; j < vendedores.size(); j++) {
+                    if (compradores.get(j).getCorreo() == correo) {
+                        System.out.println("Ingresa tu contraseña:");
+                        String contrasena = scanner.next();
+                        if ((compradores.get(j).getContrasena()) == getMD5(contrasena)) {
+                            System.out.println("Contrasena correcta");
+                            } else {
+                            System.out.println("Contrasena Incorrecta");
+                }}
+            }
+                
                 // Verificar al usuario en la base de datos 
                 // Si deseas agregar autenticación de usuario,
 
