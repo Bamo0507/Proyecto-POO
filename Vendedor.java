@@ -1,36 +1,25 @@
 public class Vendedor extends Usuario{
     //Atributos propios de un Vendedor
     private String ubicacionOfrecida;
-    private String tipoViviendaOfrecida;
     private float costoVivienda;
     private int baniosVivienda;
-    private String serviciosOfrecidos;
-    private String compraVenta;
     private int cantPersonasCuarto;
     private String uCompartida;
-
-    //Métodos propios de un Vendedor
-    
+    private int cantMensajesPendientes;    
 
     //Setters
     public void setUbicacionOfrecida(String ubicacionOfrecida) {
         this.ubicacionOfrecida = ubicacionOfrecida;
     }
-    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento, String ubicacionOfrecida,
-            String tipoViviendaOfrecida, float costoVivienda, int baniosVivienda, String serviciosOfrecidos,
-            String compraVenta, int cantPersonasCuarto, String uCompartida) {
-        super(nombre, correo, contrasena, fechaNacimiento);
+    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionOfrecida,
+            float costoVivienda, int baniosVivienda,
+            int cantPersonasCuarto, String uCompartida) {
+        super(nombre, correo, contrasena, fechaNacimiento, universidad);
         this.ubicacionOfrecida = ubicacionOfrecida;
-        this.tipoViviendaOfrecida = tipoViviendaOfrecida;
         this.costoVivienda = costoVivienda;
         this.baniosVivienda = baniosVivienda;
-        this.serviciosOfrecidos = serviciosOfrecidos;
-        this.compraVenta = compraVenta;
         this.cantPersonasCuarto = cantPersonasCuarto;
         this.uCompartida = uCompartida;
-    }
-    public void setTipoViviendaOfrecida(String tipoViviendaOfrecida) {
-        this.tipoViviendaOfrecida = tipoViviendaOfrecida;
     }
     public void setCostoVivienda(float costoVivienda) {
         this.costoVivienda = costoVivienda;
@@ -38,25 +27,22 @@ public class Vendedor extends Usuario{
     public void setBaniosVivienda(int baniosVivienda) {
         this.baniosVivienda = baniosVivienda;
     }
-    public void setServiciosOfrecidos(String serviciosOfrecidos) {
-        this.serviciosOfrecidos = serviciosOfrecidos;
-    }
-    public void setCompraVenta(String compraVenta) {
-        this.compraVenta = compraVenta;
-    }
     public void setCantPersonasCuarto(int cantPersonasCuarto) {
         this.cantPersonasCuarto = cantPersonasCuarto;
     }
     public void setuCompartida(String uCompartida) {
         this.uCompartida = uCompartida;
     }
+    public void setCantMensajesPendientes(int cantMensajesPendientes) {
+        this.cantMensajesPendientes = cantMensajesPendientes;
+    }
+    public void setUniversidad(String universidad) {
+        this.universidad = universidad;
+    }
     
     //Getters
     public String getUbicacionOfrecida() {
         return ubicacionOfrecida;
-    }
-    public String getTipoViviendaOfrecida() {
-        return tipoViviendaOfrecida;
     }
     public float getCostoVivienda() {
         return costoVivienda;
@@ -64,17 +50,14 @@ public class Vendedor extends Usuario{
     public int getBaniosVivienda() {
         return baniosVivienda;
     }
-    public String getServiciosOfrecidos() {
-        return serviciosOfrecidos;
-    }
-    public String getCompraVenta() {
-        return compraVenta;
-    }
     public int getCantPersonasCuarto() {
         return cantPersonasCuarto;
     }
     public String getuCompartida() {
         return uCompartida;
+    }
+    public String getUniversidad(){
+        return universidad;
     }
 
     //Métodos Padre

@@ -1,8 +1,13 @@
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
+import java.util.regex.*;
+
 
 public class Dormbnb {
+    private static boolean valid = true;
+    
     public static void main(String[] args) throws NoSuchAlgorithmException{
         System.out.println("***********************************************************");
         System.out.println("*  __        _______ _     ____ ___  __  __ _____ _ _ _   *");
@@ -22,74 +27,15 @@ public class Dormbnb {
         // Crear un escáner para leer la entrada del usuario
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (valid) {
             System.out.println("Elige una opción:");
             System.out.println("1. Crear una cuenta");
             System.out.println("2. Iniciar sesión");
             System.out.println("3. Salir");
             int eleccion = scanner.nextInt();
-
             if (eleccion == 1) {
                 // El usuario desea crear una cuenta
-                System.out.println("Ingresa tu nombre:");
-                String nombre = scanner.nextLine();
-                System.out.println("Ingresa tu correo electrónico:");
-                String correo = scanner.nextLine();
-                System.out.println("Ingresa tu contraseña:");
-                String contrasena = scanner.nextLine();
-                System.out.println("Ingresa tu fecha de nacimiento:");
-                String fechaNacimiento = scanner.nextLine();
-
-                System.out.println("¿Eres un Vendedor o un Comprador? (V/C):");
-                String tipoUsuario = scanner.nextLine();
-
-                if (tipoUsuario.equalsIgnoreCase("V")) {
-                    // Vendedor
-                    System.out.println("Ingresa la ubicación que ofreces:");
-                    String ubicacion = scanner.nextLine();
-                    System.out.println("Ingresa el tipo de propiedad que ofreces:");
-                    String tipoPropiedad = scanner.nextLine();
-                    System.out.println("Ingresa el costo de la vivienda:");
-                    float costoVivienda = scanner.nextFloat();
-                    System.out.println("Ingresa el número de baños de la vivienda:");
-                    int banosVivienda = scanner.nextInt();
-                    System.out.println("Ingresa los servicios ofrecidos:");
-                    String serviciosOfrecidos = scanner.nextLine();
-                    System.out.println("La vivienda es para comprar o rentar:");
-                    String compraVenta = scanner.nextLine();
-                    System.out.println("Ingresa la cantidad de personas que caben en la vivienda:");
-                    int cantPersonasCuarto = scanner.nextInt();
-                    System.out.println("¿Deseas que el edificio tenga a personas de varias universidades?");
-                    String desearCompartirU = scanner.nextLine();
-
-                    // Crea un nuevo objeto Vendedor y agrégalo a la base de datos
-                    Vendedor vendedor = new Vendedor(nombre, correo, contrasena, fechaNacimiento, ubicacion, tipoPropiedad, costoVivienda, banosVivienda, serviciosOfrecidos, compraVenta, cantPersonasCuarto, desearCompartirU);
-                    vendedores.add(vendedor);
-                    System.out.println("Cuenta de vendedor creada exitosamente!");
-                } else if (tipoUsuario.equalsIgnoreCase("C")) {
-                    // Comprador
-                    System.out.println("¿En qué ubicación desea que esté su cuarto?");
-                    String ubicacionDeseada = scanner.nextLine();
-                    System.out.println("¿Deseas compartir la residencia? (sí/no):");
-                    String compartirResidencia = scanner.next();
-                    System.out.println("¿Cuántos baños deseas?");
-                    int banosDeseados = scanner.nextInt();
-                    System.out.println("¿Deseas convivir con gente de otras universidades?");
-                    String compartirU = scanner.nextLine();
-                    System.out.println("¿Deseas comprar o rentar la vivienda?");
-                    String rentaCompra = scanner.nextLine();
-                    System.out.println("¿Cuál es tu presupuesto?");
-                    String presupuesto = scanner.nextLine();
-                    System.out.println("¿Qué tipo de vivienda deseas?");
-                    String tipoViviendaDeseado = scanner.next();
-                    System.out.println("¿Qué servicios deseas que tenga la vivienda?");
-                    String serviciosIncluidos = scanner.next();
-
-                    // Crea un nuevo objeto Comprador 
-                    Comprador comprador = new Comprador(nombre, correo, contrasena, fechaNacimiento, ubicacionDeseada, rentaCompra, presupuesto, tipoViviendaDeseado, banosDeseados, compartirU, compartirResidencia, serviciosIncluidos);
-                    compradores.add(comprador);
-                    System.out.println("Cuenta de comprador creada exitosamente!");
-                }
+                
             } else if (eleccion == 2) {
                 // El usuario desea iniciar sesión
                 System.out.println("Ingresa tu correo electrónico:");
@@ -128,5 +74,112 @@ public class Dormbnb {
             }
         }
     }
+
+    //Pedir información al usuario
+    public static List<Object> obtenerInformacion(){
+        Scanner sc = new Scanner(System.in);
+        //En el ArrayList se devolverá toda la informacion necesaria, en el orden que se vaya solicitando la misma
+        List<Object> informacion = new ArrayList<>();
+        boolean valid = true;
+        int decision = 0;
+        while(valid){
+            while(!(decision>=1 && decision <= 2)){
+                //AGREGAR VERIFICACIÓN PARA QUE EL NOMBRE DE USUARIO SEA ÚNICO
+                //AGREGAR VERIFICACIÓN PARA QUE EL NOMBRE DE USUARIO SEA ÚNICO
+                System.out.println("Por favor, ingrese su nombre de usuario: ");;
+                informacion.add(sc.nextLine());
+                //Nos aseguramos que ese sea el nombre que quiere el usuario
+                System.out.println("¿Seguro que quiere que ese sea su nombre de usuario?"); 
+                System.out.println("1. Sí\n" + "2. No\n");
+                switch(decision = obtenerEnteroValido(sc)){
+                case 1:
+                    valid = false;
+                    System.out.println("Listo, su nombre ha sido escogido.");
+                    break;
+                case 2:
+                    System.out.println("Vuelva a escoger...\n");
+                    break;
+                default:
+                    System.out.println("Por favor, selecciona algo válido \n");
+                    break;
+                }
+            }
+        }
+        decision = 0;
+        valid = true;
+        informacion.add(obtenerContrasenaSegura());
+        //AGREGAR VERIFICACIÓN PARA QUE LA CONTRASEÑA DE USUARIO SEA ÚNICO
+        //AGREGAR VERIFICACIÓN PARA QUE LA CONTRASEÑA DE USUARIO SEA ÚNICO
+        
+        
+    }
+
+
+    //Método para asegurarse que se ingrese un entero en los campos necesarios
+    public static int obtenerEnteroValido(Scanner scanner) {
+        int numero = 0;
+        boolean entradaValida = false;
+        System.out.println("------------------------");
+        do {
+            try {
+                System.out.print("Por favor, ingresa un número entero: ");
+                String entrada = scanner.nextLine();
+                numero = Integer.parseInt(entrada);
+                entradaValida = true;
+                System.out.println("");
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Debes ingresar un número entero.");
+            }
+        } while (!entradaValida);
+
+        return numero;
+    }
+    //Método para asegurarse que se ingrese un float en los campos necesarios
+    public static float obtenerFloatValido(Scanner scanner) {
+        float numero = 0.0f;  // Inicializado a 0.0f
+        boolean entradaValida = false;
+        System.out.println("------------------------");
+        do {
+            try {
+                System.out.print("Por favor, ingresa un número decimal: ");
+                String entrada = scanner.nextLine();
+                numero = Float.parseFloat(entrada);
+                entradaValida = true;
+                System.out.println("");
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Debes ingresar un número decimal.");
+            }
+        } while (!entradaValida);
+    
+        return numero;
+    }
+    
+    //Método para solicitar una contraseña con requisitos, y que se tenga que escribir 2 veces
+    public static String obtenerContrasenaSegura() {
+        Scanner scanner = new Scanner(System.in);
+        Pattern pattern = Pattern.compile("^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).*$");
+
+        while (true) {
+            System.out.println("Por favor, ingrese una contraseña segura que contenga al menos una mayúscula, un número y un símbolo (@, #, $, %, ^, & o +):");
+            String contrasena1 = scanner.nextLine();
+            String contrasena2 = scanner.nextLine();
+
+            if (!contrasena1.equals(contrasena2)) {
+                System.out.println("Las contraseñas no coinciden. Inténtelo de nuevo.");
+                continue;
+            }
+
+            if (pattern.matcher(contrasena1).matches()) {
+                System.out.println("Su contraseña ha sido establecida.");
+                return contrasena1;
+            } else {
+                System.out.println("La contraseña no cumple con los requisitos. Inténtelo de nuevo.");
+            }
+        }
+    }
+
+
+
+
 }
 

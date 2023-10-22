@@ -1,37 +1,27 @@
 public class Comprador extends Usuario {
     //Atributos únicos de la clase comprador
     private String ubicacionDeseada;
-    private String rentaCompra;
     private String presupuesto;
-    private String tipoViviendaDeseado;
     private int cantBanosDeseados;
     private String compartirU;
     private String cuartoCompartido;
-    private String serviciosIncluidos;
+    private int numero;
     //Métodos propios de Comprador
-    public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String ubicacionDeseada,String rentaCompra, String presupuesto, String tipoViviendaDeseado, int cantBanosDeseados, String compartirU, String cuartoCompartido, String serviciosIncluidos) {
-        super(nombre, correo, contrasena, fechaNacimiento);
+    public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, String presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, int numero) {
+        super(nombre, correo, contrasena, fechaNacimiento, universidad);
         this.ubicacionDeseada = ubicacionDeseada;
-        this.rentaCompra = rentaCompra;
         this.presupuesto = presupuesto;
-        this.tipoViviendaDeseado = tipoViviendaDeseado;
         this.cantBanosDeseados = cantBanosDeseados;
         this.compartirU = compartirU;
         this.cuartoCompartido = cuartoCompartido;
-        this.serviciosIncluidos = serviciosIncluidos;
+        this.numero = numero;
     }
     //Setters
     public void setUbicacionDeseada(String ubicacionDeseada) {
         this.ubicacionDeseada = ubicacionDeseada;
     }
-    public void setRentaCompra(String rentaCompra) {
-        this.rentaCompra = rentaCompra;
-    }
     public void setPresupuesto(String presupuesto) {
         this.presupuesto = presupuesto;
-    }
-    public void setTipoViviendaDeseado(String tipoViviendaDeseado) {
-        this.tipoViviendaDeseado = tipoViviendaDeseado;
     }
     public void setCantBanosDeseados(int cantBanosDeseados) {
         this.cantBanosDeseados = cantBanosDeseados;
@@ -42,21 +32,15 @@ public class Comprador extends Usuario {
     public void setCuartoCompartido(String cuartoCompartido) {
         this.cuartoCompartido = cuartoCompartido;
     }
-    public void setServiciosIncluidos(String serviciosIncluidos) {
-        this.serviciosIncluidos = serviciosIncluidos;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
     //Getters
     public String getUbicacionDeseada() {
         return ubicacionDeseada;
     }
-    public String getRentaCompra() {
-        return rentaCompra;
-    }
     public String getPresupuesto() {
         return presupuesto;
-    }
-    public String getTipoViviendaDeseado() {
-        return tipoViviendaDeseado;
     }
     public int getCantBanosDeseados() {
         return cantBanosDeseados;
@@ -67,8 +51,8 @@ public class Comprador extends Usuario {
     public String getCuartoCompartido() {
         return cuartoCompartido;
     }
-    public String getServiciosIncluidos() {
-        return serviciosIncluidos;
+    public int getNumero() {
+        return numero;
     }
 
     //Métodos Padre
@@ -84,6 +68,9 @@ public class Comprador extends Usuario {
     public void setFechaNacimiento(String fechaNacimiento){
         this.fechaNacimiento = fechaNacimiento;
     }
+    public void setUniversidad(String universidad){
+        this.universidad = universidad;
+    }
 
     public String getNombre(){
         return this.nombre;
@@ -97,12 +84,13 @@ public class Comprador extends Usuario {
     public String getContrasena(){
         return this.contrasena;
     }
+    public String getUniversidad(){
+        return this.universidad;
+    }
+    
     @Override
     public String toString() {
-        return "Comprador [ubicacionDeseada=" + ubicacionDeseada + ", rentaCompra=" + rentaCompra + ", presupuesto="
-                + presupuesto + ", tipoViviendaDeseado=" + tipoViviendaDeseado + ", cantBanosDeseados="
-                + cantBanosDeseados + ", compartirU=" + compartirU + ", cuartoCompartido=" + cuartoCompartido
-                + ", serviciosIncluidos=" + serviciosIncluidos + "]";
+        return nombre + " previamente definiste tus preferencias como: \n" + "Cantidad de baños deseados: " + cantBanosDeseados+"\n" + "Ubiación deseada: " + ubicacionDeseada +"\n" + "Tú presupuesto es de: " + presupuesto + "\n" + "Tu cuarto será compartido: " + cuartoCompartido + "\n" + "Convivirás con gente de otras universidades: " + compartirU;
     }
     
     
