@@ -1,9 +1,18 @@
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.util.regex.*;
-
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Dormbnb {
     private static boolean valid = true;
@@ -35,7 +44,8 @@ public class Dormbnb {
             int eleccion = scanner.nextInt();
             if (eleccion == 1) {
                 // El usuario desea crear una cuenta
-                
+                List<Object> informacion = obtenerInformacion();
+
             } else if (eleccion == 2) {
                 // El usuario desea iniciar sesión
                 System.out.println("Ingresa tu correo electrónico:");
@@ -78,40 +88,25 @@ public class Dormbnb {
     //Pedir información al usuario
     public static List<Object> obtenerInformacion(){
         Scanner sc = new Scanner(System.in);
+        String tipoUsuario = "";
         //En el ArrayList se devolverá toda la informacion necesaria, en el orden que se vaya solicitando la misma
         List<Object> informacion = new ArrayList<>();
-        boolean valid = true;
-        int decision = 0;
-        while(valid){
-            while(!(decision>=1 && decision <= 2)){
-                //AGREGAR VERIFICACIÓN PARA QUE EL NOMBRE DE USUARIO SEA ÚNICO
-                //AGREGAR VERIFICACIÓN PARA QUE EL NOMBRE DE USUARIO SEA ÚNICO
-                System.out.println("Por favor, ingrese su nombre de usuario: ");;
-                informacion.add(sc.nextLine());
-                //Nos aseguramos que ese sea el nombre que quiere el usuario
-                System.out.println("¿Seguro que quiere que ese sea su nombre de usuario?"); 
-                System.out.println("1. Sí\n" + "2. No\n");
-                switch(decision = obtenerEnteroValido(sc)){
-                case 1:
-                    valid = false;
-                    System.out.println("Listo, su nombre ha sido escogido.");
-                    break;
-                case 2:
-                    System.out.println("Vuelva a escoger...\n");
-                    break;
-                default:
-                    System.out.println("Por favor, selecciona algo válido \n");
-                    break;
-                }
-            }
-        }
-        decision = 0;
-        valid = true;
+        informacion.add(obtenerNombre());
         informacion.add(obtenerContrasenaSegura());
-        //AGREGAR VERIFICACIÓN PARA QUE LA CONTRASEÑA DE USUARIO SEA ÚNICO
-        //AGREGAR VERIFICACIÓN PARA QUE LA CONTRASEÑA DE USUARIO SEA ÚNICO
-        
-        
+        informacion.add(obtenerCorreoValido());
+        informacion.add(obtenerFechaNacimiento());
+        tipoUsuario = obtenerTipoUsuario();
+
+        switch(tipoUsuario){
+            case "Comprador":
+                break;
+
+            case "Vendedor":
+                break;
+        }
+
+
+        return informacion;
     }
 
 
@@ -154,6 +149,34 @@ public class Dormbnb {
         return numero;
     }
     
+    public static String obtenerNombre(){
+        Scanner sc = new Scanner(System.in);
+        int decision = 0;
+        String nombre = "";
+        while(valid){
+            while(!(decision>=1 && decision <= 2)){
+                System.out.println("Por favor, ingrese su nombre de usuario: ");
+                nombre = sc.nextLine();
+                //Nos aseguramos que ese sea el nombre que quiere el usuario
+                System.out.println("¿Seguro que quiere que ese sea su nombre de usuario?"); 
+                System.out.println("1. Sí\n" + "2. No\n");
+                switch(decision = obtenerEnteroValido(sc)){
+                case 1:
+                    valid = false;
+                    System.out.println("Listo, su nombre ha sido escogido.");
+                    break;
+                case 2:
+                    System.out.println("Vuelva a escoger...\n");
+                    break;
+                default:
+                    System.out.println("Por favor, selecciona algo válido \n");
+                    break;
+                }
+            }
+        }
+        return nombre;
+    }
+
     //Método para solicitar una contraseña con requisitos, y que se tenga que escribir 2 veces
     public static String obtenerContrasenaSegura() {
         Scanner scanner = new Scanner(System.in);
@@ -178,8 +201,96 @@ public class Dormbnb {
         }
     }
 
+    //Encontrar un Correo existente y que sea válido
+    public static String obtenerCorreoValido() {
+        Scanner scanner = new Scanner(System.in);
+        String correo;
 
+        while (true) {
+            System.out.print("Por favor, ingrese su correo electrónico: ");
+            correo = scanner.nextLine();
 
+            if (esCorreoValido(correo) && existeDominio(correo)) {
+                return correo;
+            } else {
+                System.out.println("El correo electrónico no es válido o el dominio no existe. Inténtelo de nuevo.");
+            }
+        }
+    }
 
+    //Verifica si cumple con las normas de escritura de un correo
+    public static boolean esCorreoValido(String correo) {
+        // Expresión regular para validar un correo electrónico
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(correo);
+        return matcher.matches();
+    }
+
+    //Verifica si el correo existe
+    public static boolean existeDominio(String correo) {
+        try {
+            String[] partes = correo.split("@");
+            String dominio = partes[1];
+            URI uri = new URI("http://" + dominio);
+            URL url = uri.toURL();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("HEAD");
+            return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+        } catch (URISyntaxException | IOException e) {
+            return false;
+        }
+    }
+
+    public static Date obtenerFechaNacimiento() {
+        Scanner scanner = new Scanner(System.in);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaNacimiento = null;
+        boolean fechaValida = false;
+
+        while (!fechaValida) {
+            System.out.print("Por favor, ingrese su fecha de nacimiento (dd/MM/yyyy): ");
+            String fechaNacimientoStr = scanner.nextLine();
+
+            try {
+                fechaNacimiento = dateFormat.parse(fechaNacimientoStr);
+                fechaValida = true;
+            } catch (ParseException e) {
+                System.out.println("Fecha de nacimiento no válida. Inténtelo de nuevo.");
+            }
+        }
+
+        return fechaNacimiento;
+    }
+
+    public static String obtenerTipoUsuario(){
+        Scanner sc = new Scanner(System.in);
+        int decision = 0;
+        String tipo = "";
+        boolean valid = true;
+        while(valid){
+            while(!(decision>=1 && decision <= 2)){
+                System.out.println("Por favor, ingrese si usted será un comprador o un vendedor: ");
+                //Nos aseguramos que ese sea el nombre que quiere el usuario
+                System.out.println("1. Comprador\n" + "2. Vendedor\n");
+                switch(decision = obtenerEnteroValido(sc)){
+                case 1:
+                    tipo = "Comprador";
+                    valid = false;
+                    System.out.println("Listo, es un comprador.");
+                    break;
+                case 2:
+                    tipo = "Vendedor";
+                    valid = false;
+                    System.out.println("Listo, es un vendedor.");
+                    break;
+                default:
+                    System.out.println("Por favor, selecciona algo válido \n");
+                    break;
+                }
+            }
+        }
+        return tipo;
+    }
 }
 

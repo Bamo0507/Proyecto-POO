@@ -5,16 +5,17 @@ public class Vendedor extends Usuario{
     private int baniosVivienda;
     private int cantPersonasCuarto;
     private String uCompartida;
-    private int cantMensajesPendientes;    
+    private int cantMensajesPendientes;  
+    private String universidad;  
 
     //Setters
     public void setUbicacionOfrecida(String ubicacionOfrecida) {
         this.ubicacionOfrecida = ubicacionOfrecida;
     }
-    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionOfrecida,
+    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento, String ubicacionOfrecida,
             float costoVivienda, int baniosVivienda,
             int cantPersonasCuarto, String uCompartida) {
-        super(nombre, correo, contrasena, fechaNacimiento, universidad);
+        super(nombre, correo, contrasena, fechaNacimiento);
         this.ubicacionOfrecida = ubicacionOfrecida;
         this.costoVivienda = costoVivienda;
         this.baniosVivienda = baniosVivienda;

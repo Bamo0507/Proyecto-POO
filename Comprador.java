@@ -6,9 +6,10 @@ public class Comprador extends Usuario {
     private String compartirU;
     private String cuartoCompartido;
     private int numero;
+    private String universidad;
     //Métodos propios de Comprador
     public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, String presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, int numero) {
-        super(nombre, correo, contrasena, fechaNacimiento, universidad);
+        super(nombre, correo, contrasena, fechaNacimiento);
         this.ubicacionDeseada = ubicacionDeseada;
         this.presupuesto = presupuesto;
         this.cantBanosDeseados = cantBanosDeseados;
@@ -87,7 +88,7 @@ public class Comprador extends Usuario {
     public String getUniversidad(){
         return this.universidad;
     }
-    
+
     @Override
     public String toString() {
         return nombre + " previamente definiste tus preferencias como: \n" + "Cantidad de baños deseados: " + cantBanosDeseados+"\n" + "Ubiación deseada: " + ubicacionDeseada +"\n" + "Tú presupuesto es de: " + presupuesto + "\n" + "Tu cuarto será compartido: " + cuartoCompartido + "\n" + "Convivirás con gente de otras universidades: " + compartirU;
