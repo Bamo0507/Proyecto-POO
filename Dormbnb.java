@@ -39,7 +39,7 @@ public class Dormbnb {
         // Crear un escáner para leer la entrada del usuario
         Scanner scanner = new Scanner(System.in);
 
-        String archivoCSV = "Compradores.CSV";
+        String archivoCSV = "Usuarios.CSV";
 
 
 
@@ -132,6 +132,40 @@ public class Dormbnb {
                 System.out.println("Opción no válida. Por favor, elige una opción válida.");
             }
         }
+
+        try (FileWriter writer = new FileWriter(archivoCSV)) {
+                    writer.write("nombre,correo,contrasena,fechaNacimiento,universidad/ubicacionOfrecida,ubicacionDeseada/costoVivienda,presupuesto/baniosVivienda,cantBanosDeseados/cantPersonasCuarto,compartirU/uCompartida,cuartoCompartido,numero\n");
+        
+
+                    for (int i = 0; i <compradores.size(); i++) {
+                    writer.write("C," + compradores.get(i).getNombre()+","+
+                    compradores.get(i).getCorreo() + "," +
+                    compradores.get(i).getContrasena() + "," +
+                    compradores.get(i).getFechaNacimiento() + "," +
+                    compradores.get(i).getUniversidad() + "," +
+                    compradores.get(i).getUbicacionDeseada() + "," +
+                    compradores.get(i).getPresupuesto() + "," +
+                    compradores.get(i).getCantBanosDeseados() + "," +
+                    compradores.get(i).getCompartirU() + "," +
+                    compradores.get(i).getCuartoCompartido() + "," +
+                    compradores.get(i).getNumero()+"\n");
+                } 
+                for(int j = 0; j<vendedores.size(); j++){
+                    writer.write("V," + vendedores.get(j).getNombre()+","+
+                    vendedores.get(j).getCorreo() + "," +
+                    vendedores.get(j).getContrasena() + "," +
+                    vendedores.get(j).getFechaNacimiento() + "," +
+                    vendedores.get(j).getUbicacionOfrecida() + "," +
+                    vendedores.get(j).getCostoVivienda() + "," +
+                    vendedores.get(j).getBaniosVivienda() + "," +
+                    vendedores.get(j).getCantPersonasCuarto() + "," +
+                    vendedores.get(j).getuCompartida() + "\n");
+                    }
+
+                }catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Datos sobrescritos con éxito en " + archivoCSV); 
+                }
     }
 
     //Pedir información al usuario
@@ -341,5 +375,6 @@ public class Dormbnb {
         }
         return tipo;
     }
+    
 }
 
