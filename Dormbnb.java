@@ -13,6 +13,9 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public class Dormbnb {
     private static boolean valid = true;
@@ -35,6 +38,52 @@ public class Dormbnb {
 
         // Crear un escáner para leer la entrada del usuario
         Scanner scanner = new Scanner(System.in);
+
+        String archivoCSV = "Compradores.CSV";
+
+
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] valores = linea.split(",");
+                
+                // Extraer los valores del CSV
+                String type = valores[0];
+                String nombre = valores[1];
+                String correo = valores[2];
+                String contrasena = valores[3];
+                String fechaNacimiento = valores[4];
+                String universidad = valores[5];
+                
+
+                if (type.equals("C")){
+
+                    String ubicacionDeseada = valores[6];
+                String presupuesto = valores[7];
+                int cantBanosDeseados = Integer.parseInt(valores[8]);
+                String compartirU = valores[9];
+                String cuartoCompartido = valores[10];
+                int numero = Integer.parseInt(valores[11]);
+
+                    compradores.add(new Comprador(nombre, correo, contrasena, fechaNacimiento, 
+                universidad, ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, 
+                cuartoCompartido, numero));
+                }
+                if (type.equals("V")){
+                    String ubicacionOfrecida = valores[6];
+                    float costoVivienda = Float.parseFloat(valores[7]);
+                    int baniosVivienda = Integer.parseInt(valores[8]);
+                    int cantPersonasCuarto = Integer.parseInt(valores[9]);
+                    String uCompartida = valores[10];
+
+                    vendedores.add(new Vendedor(nombre,correo,contrasena,fechaNacimiento,ubicacionOfrecida,
+                    costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while (valid) {
             System.out.println("Elige una opción:");
