@@ -340,15 +340,16 @@ public class Dormbnb {
     }  
 
     //Verificar que se ingrese una fecha válida
-    public static Date obtenerFechaNacimiento() {
+    public static String obtenerFechaNacimiento() {
         Scanner scanner = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaNacimiento = null;
+        String fechaNacimientoStr = null;
         boolean fechaValida = false;
 
         while (!fechaValida) {
             System.out.print("Por favor, ingrese su fecha de nacimiento (dd/MM/yyyy): ");
-            String fechaNacimientoStr = scanner.nextLine();
+            fechaNacimientoStr = scanner.nextLine();
 
             try {
                 fechaNacimiento = dateFormat.parse(fechaNacimientoStr);
@@ -357,7 +358,7 @@ public class Dormbnb {
                 System.out.println("Fecha de nacimiento no válida. Inténtelo de nuevo.");
             }
         }
-        return fechaNacimiento;
+        return fechaNacimientoStr;
     }
 
     //
