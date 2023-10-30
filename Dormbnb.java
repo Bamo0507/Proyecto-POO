@@ -538,5 +538,35 @@ public class Dormbnb {
         return numero;
     }
 
+    //Método para solicitar información adicional
+    public String obtenerInfoAdicional(){
+        StringBuilder sb = new StringBuilder();
+        boolean valid = true;
+        String seleccion = "";
+        Scanner sc = new Scanner(System.in);
+        while(valid){
+            System.out.println("Agrega uno por uno los servicios adicionales que se prestan en tu dorm.");
+            System.out.println("Si no quiere agregar solo seleccione salir.");
+            System.out.println("1. Agregar servicio");
+            System.out.println("2. Salir");
+            switch(seleccion = sc.nextLine()){
+                case "1":
+                    System.out.println("Escriba el servicio: ");
+                    seleccion = sc.nextLine();
+                    sb.append(seleccion).append(",");
+                    break;
+                case "2":
+                    System.out.println("Muchas gracias!!!");
+                    valid = false;
+                    break;
+                default:
+                    System.out.println("Seleccione una opción válida :D");
+                    break;
+            }
+        }
+        String informacion = sb.toString();
+        return informacion;
+    }
+
 }
 
