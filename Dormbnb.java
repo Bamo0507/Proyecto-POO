@@ -491,5 +491,20 @@ public class Dormbnb {
             }
         }
     }   
+
+    //Método para solicitar un precio
+    public float solicitarPrecio(){
+        Scanner sc = new Scanner(System.in);
+        float precio = obtenerFloatValido(sc);
+        return precio;
+    }
+
+    //Método para solicitar un presupuesto
+    public float solicitarPresupuesto(){
+        Scanner sc = new Scanner(System.in);
+        float presupuesto = obtenerFloatValido(sc);
+        return presupuesto; 
+    }
+
 }
 
