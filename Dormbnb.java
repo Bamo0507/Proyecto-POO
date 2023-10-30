@@ -371,6 +371,125 @@ public class Dormbnb {
         }
         return tipo;
     }
+    public void seleccionarUbicacionDeseada() {
+        Scanner scanner = new Scanner(System.in);
+        int seleccionTipo = 0;
+        String ubicacionDeseada = "";
     
+        while (!(seleccionTipo >= 1 && seleccionTipo <= 26)) {
+           
+            System.out.println("1. Zona 1");
+            System.out.println("2. Zona 2");
+            System.out.println("3. Zona 3");
+            System.out.println("4. Zona 4");
+            System.out.println("5. Zona 5");
+            System.out.println("6. Zona 6");
+            System.out.println("7. Zona 7");
+            System.out.println("8. Zona 8");
+            System.out.println("9. Zona 9");
+            System.out.println("10. Zona 10");
+            System.out.println("11. Zona 11");
+            System.out.println("12. Zona 12");
+            System.out.println("13. Zona 13");
+            System.out.println("14. Zona 14");
+            System.out.println("15. Zona 15");
+            System.out.println("16. Zona 16");
+            System.out.println("17. Zona 17");
+            System.out.println("18. Zona 18");
+            System.out.println("19. Zona 19");
+            System.out.println("20. Zona 20");
+            System.out.println("21. Zona 21");
+            System.out.println("22. Zona 24");
+            System.out.println("23. Zona 25");
+            System.out.println("24. San Cristobal");
+            System.out.println("25. Carretera al Salvador");
+            System.out.println("26. Mixco");
+            System.out.print("Opción: ");
+    
+            switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+                case 1:
+                    ubicacionDeseada = "Zona 1";
+                    break;
+                case 2:
+                    ubicacionDeseada = "Zona 2";
+                    break;
+                case 3:
+                    ubicacionDeseada = "Zona 3";
+                    break;
+                case 4:
+                    ubicacionDeseada = "Zona 4";
+                    break;
+                case 5:
+                    ubicacionDeseada = "Zona 5";
+                    break;
+                case 6:
+                    ubicacionDeseada = "Zona 6";
+                    break;
+                case 7:
+                    ubicacionDeseada = "Zona 7";
+                    break;
+                case 8:
+                    ubicacionDeseada = "Zona 8";
+                    break;
+                case 9:
+                    ubicacionDeseada = "Zona 9";
+                    break;
+                case 10:
+                    ubicacionDeseada = "Zona 10";
+                    break;
+                case 11:
+                    ubicacionDeseada = "Zona 11";
+                    break;
+                case 12:
+                    ubicacionDeseada = "Zona 12";
+                    break;
+                case 13:
+                    ubicacionDeseada = "Zona 13";
+                    break;
+                case 14:
+                    ubicacionDeseada = "Zona 14";
+                    break;
+                case 15:
+                    ubicacionDeseada = "Zona 15";
+                    break;
+                case 16:
+                    ubicacionDeseada = "Zona 16";
+                    break;
+                case 17:
+                    ubicacionDeseada = "Zona 17";
+                    break;
+                case 18:
+                    ubicacionDeseada = "Zona 18";
+                    break;
+                case 19:
+                    ubicacionDeseada = "Zona 19";
+                    break;
+                case 20:
+                    ubicacionDeseada = "Zona 20";
+                    break;
+                case 21:
+                    ubicacionDeseada = "Zona 21";
+                    break;
+                case 22:
+                    ubicacionDeseada = "Zona 24";
+                    break;
+                case 23:
+                    ubicacionDeseada = "Zona 25";
+                    break;
+                case 24:
+                    ubicacionDeseada = "San Cristobal";
+                    break;
+                case 25:
+                    ubicacionDeseada = "Carretera al Salvador";
+                    break;
+                case 26:
+                    ubicacionDeseada = "Mixco";
+                    break;
+                default:
+                    System.out.println("Por favor, ingresa una opción válida.");
+                    break;
+            }
+        }
+    }   
 }
 
