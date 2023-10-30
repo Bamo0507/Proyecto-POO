@@ -663,4 +663,29 @@ public void seleccionarCantidadbanosDeseada() {
         }
     }
 }    
+public void establecersino() {
+    Scanner scanner = new Scanner(System.in);
+    int seleccionTipo = 0;
+    String establecerSiNo = "";
+
+    while (!(seleccionTipo >= 1 && seleccionTipo <= 2)) {
+       
+        System.out.println("1.  Si");
+        System.out.println("2. No");
+        System.out.print("Opción: ");
+
+        switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+            case 1:
+               establecerSiNo = "Si";
+                break;
+            case 2:
+               establecerSiNo = "No";
+                break;
+            default:
+                System.out.println("Por favor, ingresa una opción válida.");
+                break;
+        }
+    }
+}   
+
 }
