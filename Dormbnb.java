@@ -340,16 +340,15 @@ public class Dormbnb {
     }  
 
     //Verificar que se ingrese una fecha válida
-    public static String obtenerFechaNacimiento() {
+    public static Date obtenerFechaNacimiento() {
         Scanner scanner = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaNacimiento = null;
-        String fechaNacimientoStr = null;
         boolean fechaValida = false;
 
         while (!fechaValida) {
             System.out.print("Por favor, ingrese su fecha de nacimiento (dd/MM/yyyy): ");
-            fechaNacimientoStr = scanner.nextLine();
+            String fechaNacimientoStr = scanner.nextLine();
 
             try {
                 fechaNacimiento = dateFormat.parse(fechaNacimientoStr);
@@ -358,7 +357,7 @@ public class Dormbnb {
                 System.out.println("Fecha de nacimiento no válida. Inténtelo de nuevo.");
             }
         }
-        return fechaNacimientoStr;
+        return fechaNacimiento;
     }
 
     //
@@ -391,7 +390,7 @@ public class Dormbnb {
         }
         return tipo;
     }
-    public void seleccionarUbicacionDeseada() {
+    public String seleccionarUbicacionDeseada() {
         Scanner scanner = new Scanner(System.in);
         int seleccionTipo = 0;
         String ubicacionDeseada = "";
@@ -509,6 +508,7 @@ public class Dormbnb {
                     break;
             }
         }
+        return ubicacionDeseada;
     }   
 
     //Método para solicitar un precio
@@ -587,7 +587,7 @@ public class Dormbnb {
         return informacion;
     }
 
-public void seleccionarUniversidadDeseada() {
+public String seleccionarUniversidadDeseada() {
     Scanner scanner = new Scanner(System.in);
     int seleccionTipo = 0;
     String universidadDeseada = "";
@@ -658,6 +658,7 @@ public void seleccionarUniversidadDeseada() {
                 break;
         }
     }
+    return universidadDeseada;
 } 
 public void seleccionarCantidadbanosDeseada() {
     Scanner scanner = new Scanner(System.in);
