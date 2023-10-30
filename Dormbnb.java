@@ -376,7 +376,7 @@ public class Dormbnb {
         int seleccionTipo = 0;
         String ubicacionDeseada = "";
     
-        while (!(seleccionTipo >= 1 && seleccionTipo <= 26)) {
+        while (!(seleccionTipo >= 1 && seleccionTipo <= 25)) {
            
             System.out.println("1. Zona 1");
             System.out.println("2. Zona 2");
@@ -397,13 +397,12 @@ public class Dormbnb {
             System.out.println("17. Zona 17");
             System.out.println("18. Zona 18");
             System.out.println("19. Zona 19");
-            System.out.println("20. Zona 20");
-            System.out.println("21. Zona 21");
-            System.out.println("22. Zona 24");
-            System.out.println("23. Zona 25");
-            System.out.println("24. San Cristobal");
-            System.out.println("25. Carretera al Salvador");
-            System.out.println("26. Mixco");
+            System.out.println("20. Zona 21");
+            System.out.println("21. Zona 24");
+            System.out.println("22. Zona 25");
+            System.out.println("23. San Cristobal");
+            System.out.println("24. Carretera al Salvador");
+            System.out.println("25. Mixco");
             System.out.print("Opción: ");
     
             switch (seleccionTipo = obtenerEnteroValido(scanner)) {
@@ -568,5 +567,76 @@ public class Dormbnb {
         return informacion;
     }
 
-}
+public void seleccionarUniversidadDeseada() {
+    Scanner scanner = new Scanner(System.in);
+    int seleccionTipo = 0;
+    String universidadDeseada = "";
 
+    while (!(seleccionTipo >= 1 && seleccionTipo <= 14)) {
+       
+        System.out.println("1. Universidad del Valle de Guatemala");
+        System.out.println("2. Universidad Francisco Marroquín");
+        System.out.println("3. Universidad Rafael Landivar");
+        System.out.println("4. Universidad del Istmo");
+        System.out.println("5. Universidad San Carlos");
+        System.out.println("6. Universidad Mariano Galvez");
+        System.out.println("7. Universidad Panamericana");
+        System.out.println("8. Universidad Mesoamericana");
+        System.out.println("9. Universidad Galileo");
+        System.out.println("10. Universidad Rural");
+        System.out.println("11. Universidad Da Vinci");
+        System.out.println("12. Universidad San Pablo");
+        System.out.println("13. Universidad Internaciones");
+        System.out.println("14. Universidad De Occidente");
+        System.out.print("Opción: ");
+
+        switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+            case 1:
+                universidadDeseada = "Universidad del Valle de Guatemala";
+                break;
+            case 2:
+                universidadDeseada = "Universidad Francisco Marroquín";
+                break;
+            case 3:
+                universidadDeseada = "Universidad Rafael Landivar";
+                break;
+            case 4:
+                universidadDeseada = "Universidad del Istmo";
+                break;
+            case 5:
+                universidadDeseada = "Universidad San Carlos";
+                break;
+            case 6:
+                universidadDeseada = "Universidad Mariano Galvez";
+                break;
+            case 7:
+                universidadDeseada = "Universidad Panamericana";
+                break;
+            case 8:
+                universidadDeseada = "Universidad Mesoamericana";
+                break;
+            case 9:
+                universidadDeseada = "Universidad Galileo";
+                break;
+            case 10:
+                universidadDeseada = "Universidad Rural";
+                break;
+            case 11:
+                universidadDeseada = "Universidad Da Vinci";
+                break;
+            case 12:
+                universidadDeseada = "Universidad San Pablo";
+                break;
+            case 13:
+                universidadDeseada = "Universidad Internaciones";
+                break;
+            case 14:
+                universidadDeseada = "Universidad De Occidente";
+                break;
+            default:
+                System.out.println("Por favor, ingresa una opción válida.");
+                break;
+        }
+    }
+}  
+}
