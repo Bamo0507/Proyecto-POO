@@ -10,8 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -312,15 +310,34 @@ public class Dormbnb {
         try {
             String[] partes = correo.split("@");
             String dominio = partes[1];
-            URI uri = new URI("http://" + dominio);
-            URL url = uri.toURL();
+            URL url = new URL("http://" + dominio);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setInstanceFollowRedirects(false); // Desactiva las redirecciones automáticas
             connection.setRequestMethod("HEAD");
-            return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-        } catch (URISyntaxException | IOException e) {
+    
+            int responseCode = connection.getResponseCode();
+    
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("Se encontró el dominio.");
+                return true;
+            } else if (responseCode == HttpURLConnection.HTTP_MOVED_PERM || responseCode == HttpURLConnection.HTTP_MOVED_TEMP) {
+                // Si hay una redirección, sigue la nueva ubicación
+                String newLocation = connection.getHeaderField("Location");
+                if (newLocation != null) {
+                    HttpURLConnection newConnection = (HttpURLConnection) new URL(newLocation).openConnection();
+                    newConnection.setRequestMethod("HEAD");
+                    int newResponseCode = newConnection.getResponseCode();    
+                    if (newResponseCode == HttpURLConnection.HTTP_OK) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace(); // Imprime el stack trace en caso de excepción
             return false;
         }
-    }
+    }  
 
     //Verificar que se ingrese una fecha válida
     public static Date obtenerFechaNacimiento() {
