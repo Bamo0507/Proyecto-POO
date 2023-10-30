@@ -638,5 +638,29 @@ public void seleccionarUniversidadDeseada() {
                 break;
         }
     }
-}  
+} 
+public void seleccionarCantidadbanosDeseada() {
+    Scanner scanner = new Scanner(System.in);
+    int seleccionTipo = 0;
+    String cantidadBanosDeseada = "";
+
+    while (!(seleccionTipo >= 1 && seleccionTipo <= 2)) {
+       
+        System.out.println("1. 1 bano");
+        System.out.println("2. 2 banos");
+        System.out.print("Opción: ");
+
+        switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+            case 1:
+                cantidadBanosDeseada = "1 bano";
+                break;
+            case 2:
+                cantidadBanosDeseada = "2 banos";
+                break;
+            default:
+                System.out.println("Por favor, ingresa una opción válida.");
+                break;
+        }
+    }
+}    
 }
