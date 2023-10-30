@@ -506,5 +506,37 @@ public class Dormbnb {
         return presupuesto; 
     }
 
+    //Método para solicitar número
+    public static String obtenerNumeroTelefonico() {
+        Scanner sc = new Scanner(System.in);
+        String numero = "";
+        boolean valid = true;
+
+        while (valid) {
+            System.out.println("Por favor, ingresa tu número telefónico (8 dígitos):");
+            numero = sc.nextLine();
+
+            // Verificar si la longitud es de 8 dígitos
+            if (numero.length() != 8) {
+                System.out.println("El número telefónico debe contener 8 dígitos.");
+            } else {
+                // Verificar si todos los caracteres son dígitos
+                boolean esNumero = true;
+                for (int i = 0; i < numero.length(); i++) {
+                    if (!Character.isDigit(numero.charAt(i))) {
+                        esNumero = false;
+                        break;
+                    }
+                }
+                if (!esNumero) {
+                    System.out.println("El número telefónico solo debe contener dígitos.");
+                } else {
+                    valid = false; // Terminar el bucle si el número es válido
+                }
+            }
+        }
+        return numero;
+    }
+
 }
 
