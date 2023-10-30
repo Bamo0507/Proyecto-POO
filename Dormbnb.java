@@ -135,8 +135,6 @@ public class Dormbnb {
 
         try (FileWriter writer = new FileWriter(archivoCSV)) {
                     writer.write("nombre,correo,contrasena,fechaNacimiento,universidad/ubicacionOfrecida,ubicacionDeseada/costoVivienda,presupuesto/baniosVivienda,cantBanosDeseados/cantPersonasCuarto,compartirU/uCompartida,cuartoCompartido,numero\n");
-        
-
                     for (int i = 0; i <compradores.size(); i++) {
                     writer.write("C," + compradores.get(i).getNombre()+","+
                     compradores.get(i).getCorreo() + "," +
@@ -179,7 +177,6 @@ public class Dormbnb {
         informacion.add(obtenerCorreoValido());
         informacion.add(obtenerFechaNacimiento());
         tipoUsuario = obtenerTipoUsuario();
-
         switch(tipoUsuario){
             case "Comprador":
                 break;
@@ -187,8 +184,6 @@ public class Dormbnb {
             case "Vendedor":
                 break;
         }
-
-
         return informacion;
     }
 
@@ -325,6 +320,7 @@ public class Dormbnb {
         }
     }
 
+    //Verificar que se ingrese una fecha válida
     public static Date obtenerFechaNacimiento() {
         Scanner scanner = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -342,10 +338,10 @@ public class Dormbnb {
                 System.out.println("Fecha de nacimiento no válida. Inténtelo de nuevo.");
             }
         }
-
         return fechaNacimiento;
     }
 
+    //
     public static String obtenerTipoUsuario(){
         Scanner sc = new Scanner(System.in);
         int decision = 0;
