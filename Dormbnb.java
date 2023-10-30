@@ -232,6 +232,7 @@ public class Dormbnb {
         int decision = 0;
         String nombre = "";
         while(valid){
+            decision = 0;
             while(!(decision>=1 && decision <= 2)){
                 System.out.println("Por favor, ingrese su nombre de usuario: ");
                 nombre = sc.nextLine();
@@ -263,6 +264,7 @@ public class Dormbnb {
         while (true) {
             System.out.println("Por favor, ingrese una contraseña segura que contenga al menos una mayúscula, un número y un símbolo (@, #, $, %, ^, & o +):");
             String contrasena1 = scanner.nextLine();
+            System.out.println("Por favor, vuelva a ingresar la contraseña:");
             String contrasena2 = scanner.nextLine();
 
             if (!contrasena1.equals(contrasena2)) {
