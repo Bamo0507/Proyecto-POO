@@ -91,7 +91,6 @@ public class Dormbnb {
             int eleccion = scanner.nextInt();
             if (eleccion == 1) {
                 // El usuario desea crear una cuenta
-                List<Object> informacion = obtenerInformacion();
 
             } else if (eleccion == 2) {
                 // El usuario desea iniciar sesión
@@ -163,28 +162,6 @@ public class Dormbnb {
                     System.out.println("Datos sobrescritos con éxito en " + archivoCSV); 
                 }
     }
-
-    //Pedir información al usuario
-    public static List<Object> obtenerInformacion(){
-        Scanner sc = new Scanner(System.in);
-        String tipoUsuario = "";
-        //En el ArrayList se devolverá toda la informacion necesaria, en el orden que se vaya solicitando la misma
-        List<Object> informacion = new ArrayList<>();
-        informacion.add(obtenerNombre());
-        informacion.add(obtenerContrasenaSegura());
-        informacion.add(obtenerCorreoValido());
-        informacion.add(obtenerFechaNacimiento());
-        tipoUsuario = obtenerTipoUsuario();
-        switch(tipoUsuario){
-            case "Comprador":
-                break;
-
-            case "Vendedor":
-                break;
-        }
-        return informacion;
-    }
-
 
     //Método para asegurarse que se ingrese un entero en los campos necesarios
     public static int obtenerEnteroValido(Scanner scanner) {
@@ -360,7 +337,7 @@ public class Dormbnb {
         return fechaNacimiento;
     }
 
-    //
+    //Se devuelve si el usuario desea ser un comprador o un vendedor
     public static String obtenerTipoUsuario(){
         Scanner sc = new Scanner(System.in);
         int decision = 0;
@@ -390,7 +367,9 @@ public class Dormbnb {
         }
         return tipo;
     }
-    public String seleccionarUbicacionDeseada() {
+
+    //Se devuelve una ubicación
+    public static String seleccionarUbicacionDeseada() {
         Scanner scanner = new Scanner(System.in);
         int seleccionTipo = 0;
         String ubicacionDeseada = "";
@@ -512,14 +491,14 @@ public class Dormbnb {
     }   
 
     //Método para solicitar un precio
-    public float solicitarPrecio(){
+    public static float solicitarPrecio(){
         Scanner sc = new Scanner(System.in);
         float precio = obtenerFloatValido(sc);
         return precio;
     }
 
     //Método para solicitar un presupuesto
-    public float solicitarPresupuesto(){
+    public static float solicitarPresupuesto(){
         Scanner sc = new Scanner(System.in);
         float presupuesto = obtenerFloatValido(sc);
         return presupuesto; 
@@ -558,7 +537,7 @@ public class Dormbnb {
     }
 
     //Método para solicitar información adicional
-    public String obtenerInfoAdicional(){
+    public static String obtenerInfoAdicional(){
         StringBuilder sb = new StringBuilder();
         boolean valid = true;
         String seleccion = "";
@@ -587,126 +566,136 @@ public class Dormbnb {
         return informacion;
     }
 
-public String seleccionarUniversidadDeseada() {
-    Scanner scanner = new Scanner(System.in);
-    int seleccionTipo = 0;
-    String universidadDeseada = "";
+    //Método para seleccionar una Unviersidad
+    public static String seleccionarUniversidadDeseada() {
+        Scanner scanner = new Scanner(System.in);
+        int seleccionTipo = 0;
+        String universidadDeseada = "";
 
-    while (!(seleccionTipo >= 1 && seleccionTipo <= 14)) {
-       
-        System.out.println("1. Universidad del Valle de Guatemala");
-        System.out.println("2. Universidad Francisco Marroquín");
-        System.out.println("3. Universidad Rafael Landivar");
-        System.out.println("4. Universidad del Istmo");
-        System.out.println("5. Universidad San Carlos");
-        System.out.println("6. Universidad Mariano Galvez");
-        System.out.println("7. Universidad Panamericana");
-        System.out.println("8. Universidad Mesoamericana");
-        System.out.println("9. Universidad Galileo");
-        System.out.println("10. Universidad Rural");
-        System.out.println("11. Universidad Da Vinci");
-        System.out.println("12. Universidad San Pablo");
-        System.out.println("13. Universidad Internaciones");
-        System.out.println("14. Universidad De Occidente");
-        System.out.print("Opción: ");
+        while (!(seleccionTipo >= 1 && seleccionTipo <= 14)) {
+        
+            System.out.println("1. Universidad del Valle de Guatemala");
+            System.out.println("2. Universidad Francisco Marroquín");
+            System.out.println("3. Universidad Rafael Landivar");
+            System.out.println("4. Universidad del Istmo");
+            System.out.println("5. Universidad San Carlos");
+            System.out.println("6. Universidad Mariano Galvez");
+            System.out.println("7. Universidad Panamericana");
+            System.out.println("8. Universidad Mesoamericana");
+            System.out.println("9. Universidad Galileo");
+            System.out.println("10. Universidad Rural");
+            System.out.println("11. Universidad Da Vinci");
+            System.out.println("12. Universidad San Pablo");
+            System.out.println("13. Universidad Internaciones");
+            System.out.println("14. Universidad De Occidente");
+            System.out.print("Opción: ");
 
-        switch (seleccionTipo = obtenerEnteroValido(scanner)) {
-            case 1:
-                universidadDeseada = "Universidad del Valle de Guatemala";
-                break;
-            case 2:
-                universidadDeseada = "Universidad Francisco Marroquín";
-                break;
-            case 3:
-                universidadDeseada = "Universidad Rafael Landivar";
-                break;
-            case 4:
-                universidadDeseada = "Universidad del Istmo";
-                break;
-            case 5:
-                universidadDeseada = "Universidad San Carlos";
-                break;
-            case 6:
-                universidadDeseada = "Universidad Mariano Galvez";
-                break;
-            case 7:
-                universidadDeseada = "Universidad Panamericana";
-                break;
-            case 8:
-                universidadDeseada = "Universidad Mesoamericana";
-                break;
-            case 9:
-                universidadDeseada = "Universidad Galileo";
-                break;
-            case 10:
-                universidadDeseada = "Universidad Rural";
-                break;
-            case 11:
-                universidadDeseada = "Universidad Da Vinci";
-                break;
-            case 12:
-                universidadDeseada = "Universidad San Pablo";
-                break;
-            case 13:
-                universidadDeseada = "Universidad Internaciones";
-                break;
-            case 14:
-                universidadDeseada = "Universidad De Occidente";
-                break;
-            default:
-                System.out.println("Por favor, ingresa una opción válida.");
-                break;
+            switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+                case 1:
+                    universidadDeseada = "Universidad del Valle de Guatemala";
+                    break;
+                case 2:
+                    universidadDeseada = "Universidad Francisco Marroquín";
+                    break;
+                case 3:
+                    universidadDeseada = "Universidad Rafael Landivar";
+                    break;
+                case 4:
+                    universidadDeseada = "Universidad del Istmo";
+                    break;
+                case 5:
+                    universidadDeseada = "Universidad San Carlos";
+                    break;
+                case 6:
+                    universidadDeseada = "Universidad Mariano Galvez";
+                    break;
+                case 7:
+                    universidadDeseada = "Universidad Panamericana";
+                    break;
+                case 8:
+                    universidadDeseada = "Universidad Mesoamericana";
+                    break;
+                case 9:
+                    universidadDeseada = "Universidad Galileo";
+                    break;
+                case 10:
+                    universidadDeseada = "Universidad Rural";
+                    break;
+                case 11:
+                    universidadDeseada = "Universidad Da Vinci";
+                    break;
+                case 12:
+                    universidadDeseada = "Universidad San Pablo";
+                    break;
+                case 13:
+                    universidadDeseada = "Universidad Internaciones";
+                    break;
+                case 14:
+                    universidadDeseada = "Universidad De Occidente";
+                    break;
+                default:
+                    System.out.println("Por favor, ingresa una opción válida.");
+                    break;
+            }
         }
-    }
-    return universidadDeseada;
-} 
-public void seleccionarCantidadbanosDeseada() {
-    Scanner scanner = new Scanner(System.in);
-    int seleccionTipo = 0;
-    String cantidadBanosDeseada = "";
+        return universidadDeseada;
+    } 
 
-    while (!(seleccionTipo >= 1 && seleccionTipo <= 2)) {
-       
-        System.out.println("1. 1 bano");
-        System.out.println("2. 2 banos");
-        System.out.print("Opción: ");
+    //Seleccionar cantidad de baños
+    public int seleccionarCantidadbanosDeseada() {
+        Scanner scanner = new Scanner(System.in);
+        int seleccionTipo = 0;
+        int cantidadBanosDeseada = -1;
 
-        switch (seleccionTipo = obtenerEnteroValido(scanner)) {
-            case 1:
-                cantidadBanosDeseada = "1 bano";
-                break;
-            case 2:
-                cantidadBanosDeseada = "2 banos";
-                break;
-            default:
-                System.out.println("Por favor, ingresa una opción válida.");
-                break;
+        while (!(seleccionTipo >= 1 && seleccionTipo <= 3)) {
+        
+            System.out.println("1. 0 baños");
+            System.out.println("2. 1 baño");
+            System.out.println("3. 2 baños");
+            System.out.print("Opción: ");
+
+            switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+                case 1:
+                    cantidadBanosDeseada = 0;
+                    break;
+                case 2:
+                    cantidadBanosDeseada = 1;
+                    break;
+                case 3:
+                    cantidadBanosDeseada = 2;
+                default:
+                    System.out.println("Por favor, ingresa una opción válida.");
+                    break;
+            }
         }
-    }
-}    
-public void establecersino() {
-    Scanner scanner = new Scanner(System.in);
-    int seleccionTipo = 0;
-    String establecerSiNo = "";
+        return cantidadBanosDeseada;
+    }    
 
-    while (!(seleccionTipo >= 1 && seleccionTipo <= 2)) {
-       
-        System.out.println("1.  Si");
-        System.out.println("2. No");
-        System.out.print("Opción: ");
+    //Devolver una respuesta afirmativa o negativa
+    public String establecersino() {
+        Scanner scanner = new Scanner(System.in);
+        int seleccionTipo = 0;
+        String establecerSiNo = "";
 
-        switch (seleccionTipo = obtenerEnteroValido(scanner)) {
-            case 1:
-               establecerSiNo = "Si";
-                break;
-            case 2:
-               establecerSiNo = "No";
-                break;
-            default:
-                System.out.println("Por favor, ingresa una opción válida.");
-                break;
+        while (!(seleccionTipo >= 1 && seleccionTipo <= 2)) {
+        
+            System.out.println("1.  Si");
+            System.out.println("2. No");
+            System.out.print("Opción: ");
+
+            switch (seleccionTipo = obtenerEnteroValido(scanner)) {
+                case 1:
+                establecerSiNo = "Si";
+                    break;
+                case 2:
+                establecerSiNo = "No";
+                    break;
+                default:
+                    System.out.println("Por favor, ingresa una opción válida.");
+                    break;
+            }
         }
-    }
-}   
+        return establecerSiNo;
+    }   
 
 }
