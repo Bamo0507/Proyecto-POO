@@ -7,6 +7,7 @@ public class Vendedor extends Usuario{
     private String uCompartida;
     private int cantMensajesPendientes;  
     private String universidad;  
+    private Dorm[] dorms = new Dorm[5]; 
 
     //Setters
     public void setUbicacionOfrecida(String ubicacionOfrecida) {
