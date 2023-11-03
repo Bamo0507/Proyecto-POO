@@ -1,39 +1,14 @@
+import java.util.ArrayList;
+
 public class Vendedor extends Usuario{
     //Atributos propios de un Vendedor
-    private String ubicacionOfrecida;
-    private float costoVivienda;
-    private int baniosVivienda;
-    private int cantPersonasCuarto;
-    private String uCompartida;
     private int cantMensajesPendientes;  
     private String universidad;  
-    private Dorm[] dorms = new Dorm[5]; 
+    private ArrayList<Dorm> dorms = new ArrayList<>(); 
 
     //Setters
-    public void setUbicacionOfrecida(String ubicacionOfrecida) {
-        this.ubicacionOfrecida = ubicacionOfrecida;
-    }
-    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento, String ubicacionOfrecida,
-            float costoVivienda, int baniosVivienda,
-            int cantPersonasCuarto, String uCompartida) {
+    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento) {
         super(nombre, correo, contrasena, fechaNacimiento);
-        this.ubicacionOfrecida = ubicacionOfrecida;
-        this.costoVivienda = costoVivienda;
-        this.baniosVivienda = baniosVivienda;
-        this.cantPersonasCuarto = cantPersonasCuarto;
-        this.uCompartida = uCompartida;
-    }
-    public void setCostoVivienda(float costoVivienda) {
-        this.costoVivienda = costoVivienda;
-    }
-    public void setBaniosVivienda(int baniosVivienda) {
-        this.baniosVivienda = baniosVivienda;
-    }
-    public void setCantPersonasCuarto(int cantPersonasCuarto) {
-        this.cantPersonasCuarto = cantPersonasCuarto;
-    }
-    public void setuCompartida(String uCompartida) {
-        this.uCompartida = uCompartida;
     }
     public void setCantMensajesPendientes(int cantMensajesPendientes) {
         this.cantMensajesPendientes = cantMensajesPendientes;
@@ -41,25 +16,19 @@ public class Vendedor extends Usuario{
     public void setUniversidad(String universidad) {
         this.universidad = universidad;
     }
+    public void addDorm(String ubicacionOfrecida, float costoVivienda, int baniosVivienda, int cantPersonasCuarto,
+    String uCompartida){
+        dorms.add(new Dorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto,
+        uCompartida));
+        
+    }
     
     //Getters
-    public String getUbicacionOfrecida() {
-        return ubicacionOfrecida;
-    }
-    public float getCostoVivienda() {
-        return costoVivienda;
-    }
-    public int getBaniosVivienda() {
-        return baniosVivienda;
-    }
-    public int getCantPersonasCuarto() {
-        return cantPersonasCuarto;
-    }
-    public String getuCompartida() {
-        return uCompartida;
-    }
     public String getUniversidad(){
         return universidad;
+    }
+    public ArrayList<Dorm> getDorms(){
+        return dorms;
     }
 
     //Métodos Padre

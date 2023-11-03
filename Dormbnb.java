@@ -69,14 +69,20 @@ public class Dormbnb {
                 cuartoCompartido, numero));
                 }
                 if (type.equals("V")){
-                    String ubicacionOfrecida = valores[6];
-                    float costoVivienda = Float.parseFloat(valores[7]);
-                    int baniosVivienda = Integer.parseInt(valores[8]);
-                    int cantPersonasCuarto = Integer.parseInt(valores[9]);
-                    String uCompartida = valores[10];
-
-                    vendedores.add(new Vendedor(nombre,correo,contrasena,fechaNacimiento,ubicacionOfrecida,
-                    costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida));
+                    Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaNacimiento);
+                    for (int i = 6; i < valores.length; i += 5) {
+                        if (i + 4 < valores.length) {
+                            String ubicacionOfrecida = valores[i];
+                            float costoVivienda = Float.parseFloat(valores[i + 1]);
+                            int baniosVivienda = Integer.parseInt(valores[i + 2]);
+                            int cantPersonasCuarto = Integer.parseInt(valores[i + 3]);
+                            String uCompartida = valores[i + 4];
+                        vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida);
+                    }else {
+                        break;
+                    }
+                    }
+                    vendedores.add(vendedor);
                 }
             }
         } catch (IOException e) {
@@ -145,18 +151,34 @@ public class Dormbnb {
                     compradores.get(i).getCuartoCompartido() + "," +
                     compradores.get(i).getNumero()+"\n");
                 } 
-                for(int j = 0; j<vendedores.size(); j++){
-                    writer.write("V," + vendedores.get(j).getNombre()+","+
-                    vendedores.get(j).getCorreo() + "," +
-                    vendedores.get(j).getContrasena() + "," +
-                    vendedores.get(j).getFechaNacimiento() + "," +
-                    vendedores.get(j).getUbicacionOfrecida() + "," +
-                    vendedores.get(j).getCostoVivienda() + "," +
-                    vendedores.get(j).getBaniosVivienda() + "," +
-                    vendedores.get(j).getCantPersonasCuarto() + "," +
-                    vendedores.get(j).getuCompartida() + "\n");
+                for (int j = 0; j < vendedores.size(); j++) {
+                    writer.write("V," + vendedores.get(j).getNombre() + "," +
+                            vendedores.get(j).getCorreo() + "," +
+                            vendedores.get(j).getContrasena() + "," +
+                            vendedores.get(j).getFechaNacimiento() + ",");
+                
+                    for (int h = 0; h < vendedores.get(j).getDorms().size(); h++) {
+                        Dorm dormitorio = vendedores.get(j).getDorms().get(h);
+                        writer.write(dormitorio.getUbicacionOfrecida() + "," +
+                                dormitorio.getCostoVivienda() + "," +
+                                dormitorio.getBaniosVivienda() + "," +
+                                dormitorio.getCantPersonasCuarto() + "," +
+                                dormitorio.getuCompartida());
+                
+                        // Comprobar si es el último dormitorio en la lista
+                        if (h == vendedores.get(j).getDorms().size() - 1) {
+                            writer.write("\n");
+                        } else {
+                            writer.write(",");
+                        }
                     }
-
+                }
+                
+                
+                
+                
+                
+                
                 }catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("Datos sobrescritos con éxito en " + archivoCSV); 
