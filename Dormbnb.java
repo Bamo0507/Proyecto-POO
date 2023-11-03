@@ -172,13 +172,7 @@ public class Dormbnb {
                             writer.write(",");
                         }
                     }
-                }
-                
-                
-                
-                
-                
-                
+                } 
                 }catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("Datos sobrescritos con éxito en " + archivoCSV); 

@@ -47,4 +47,10 @@ public class Dorm {
         this.ubicacionOfrecida = ubicacionOfrecida;
     }
 
+    public String toString() {
+        return "Ubicacion: " + ubicacionOfrecida + " | Espacios por cuarto: " + cantPersonasCuarto + " | No. de Banios: " + baniosVivienda + "\n"+
+        " | Habitacion compartida: " + uCompartida + " | Precio Alquiler:" + costoVivienda;
+
+    }
+
 }
