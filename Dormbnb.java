@@ -89,7 +89,7 @@ public class Dormbnb {
             e.printStackTrace();
         }
 
-        while (valid) {
+        while (valid==true) {
             System.out.println("Elige una opción:");
             System.out.println("1. Crear una cuenta");
             System.out.println("2. Iniciar sesión");
@@ -112,7 +112,7 @@ public class Dormbnb {
                 float presupuesto = solicitarPresupuesto();
                 System.out.println("Inrese la cantidad de baños que desea: ");
                 int cantBanosDeseados = seleccionarCantidadbanosDeseada();
-                System.out.println("Deseas compartir cuarto? ");
+                System.out.println("Deseas un dorm multi-universitario? ");
                 String compartirU = establecersino(); 
                 System.out.println("Deseas compartir cuarto? ");
                 String cuartoCompartido = establecersino();
@@ -130,27 +130,27 @@ public class Dormbnb {
                 
                 }
                 // El usuario desea crear una cuenta
-
+                valid = true;
             } else if (eleccion == 2) {
                 // El usuario desea iniciar sesión
                 System.out.println("Ingresa tu correo electrónico:");
                 String correo = scanner.next();
                 for (int i = 0; i <compradores.size(); i++) {
-                    if (compradores.get(i).getCorreo() == correo) {
+                    if (compradores.get(i).getCorreo().equals(correo)) {
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
                         contrasena = MD5Hash.getMd5(contrasena); 
-                        if ((compradores.get(i).getContrasena()) == contrasena ) {
+                        if ((compradores.get(i).getContrasena()).equals(contrasena) ) {
                             System.out.println("Contrasena correcta");
                             } else {
                             System.out.println("Contrasena Incorrecta");
                 }}}
                 for (int j = 0; j < vendedores.size(); j++) {
-                    if (compradores.get(j).getCorreo() == correo) {
+                    if (vendedores.get(j).getCorreo().equals(correo)) {
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
                         contrasena = MD5Hash.getMd5(contrasena);
-                        if ((compradores.get(j).getContrasena()) == contrasena) {
+                        if ((vendedores.get(j).getContrasena()).equals(contrasena)) {
                             System.out.println("Contrasena correcta");
                             } else {
                             System.out.println("Contrasena Incorrecta");
@@ -163,7 +163,7 @@ public class Dormbnb {
             } else if (eleccion == 3) {
                 // Salir del programa
                 System.out.println("¡Adiós, Gracias por utilizar Dormbnb!");
-                break;
+                valid =!valid;
             } else {
                 System.out.println("Opción no válida. Por favor, elige una opción válida.");
             }
@@ -557,9 +557,9 @@ public class Dormbnb {
     public static String obtenerNumeroTelefonico() {
         Scanner sc = new Scanner(System.in);
         String numero = "";
-        boolean valid = true;
+        boolean valid1 = true;
 
-        while (valid) {
+        while (valid1) {
             System.out.println("Por favor, ingresa tu número telefónico (8 dígitos):");
             numero = sc.nextLine();
 
@@ -578,7 +578,7 @@ public class Dormbnb {
                 if (!esNumero) {
                     System.out.println("El número telefónico solo debe contener dígitos.");
                 } else {
-                    valid = false; // Terminar el bucle si el número es válido
+                    valid1 = false; // Terminar el bucle si el número es válido
                 }
             }
         }
