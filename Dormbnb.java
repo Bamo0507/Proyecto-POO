@@ -98,7 +98,7 @@ public class Dormbnb {
             if (eleccion == 1) {
                 String nombre = obtenerNombre();
                 String correo = obtenerCorreoValido();
-                String contrasena = obtenerContrasenaSegura();
+                String contrasena = MD5Hash.getMd5(obtenerContrasenaSegura());
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String fechaComoString = formato.format(obtenerFechaNacimiento());
                 String universidad = seleccionarUniversidadDeseada();
