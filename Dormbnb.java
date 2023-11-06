@@ -170,7 +170,7 @@ public class Dormbnb {
         }
 
         try (FileWriter writer = new FileWriter(archivoCSV)) {
-                    writer.write("nombre,correo,contrasena,fechaNacimiento,universidad/ubicacionOfrecida,ubicacionDeseada/costoVivienda,presupuesto/baniosVivienda,cantBanosDeseados/cantPersonasCuarto,compartirU/uCompartida,cuartoCompartido,numero\n");
+                    writer.write("tipo,nombre,correo,contrasena,fechaNacimiento,universidad/ubicacionOfrecida,ubicacionDeseada/costoVivienda,presupuesto/baniosVivienda,cantBanosDeseados/cantPersonasCuarto,compartirU/uCompartida,cuartoCompartido,numero\n");
                     for (int i = 0; i <compradores.size(); i++) {
                     writer.write("C," + compradores.get(i).getNombre()+","+
                     compradores.get(i).getCorreo() + "," +
