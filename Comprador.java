@@ -1,14 +1,14 @@
 public class Comprador extends Usuario {
     //Atributos únicos de la clase comprador
     private String ubicacionDeseada;
-    private String presupuesto;
+    private float presupuesto;
     private int cantBanosDeseados;
     private String compartirU;
     private String cuartoCompartido;
-    private int numero;
+    private String numero;
     private String universidad;
     //Métodos propios de Comprador
-    public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, String presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, int numero) {
+    public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, float presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, String numero) {
         super(nombre, correo, contrasena, fechaNacimiento);
         this.ubicacionDeseada = ubicacionDeseada;
         this.presupuesto = presupuesto;
@@ -21,7 +21,7 @@ public class Comprador extends Usuario {
     public void setUbicacionDeseada(String ubicacionDeseada) {
         this.ubicacionDeseada = ubicacionDeseada;
     }
-    public void setPresupuesto(String presupuesto) {
+    public void setPresupuesto(float presupuesto) {
         this.presupuesto = presupuesto;
     }
     public void setCantBanosDeseados(int cantBanosDeseados) {
@@ -33,14 +33,14 @@ public class Comprador extends Usuario {
     public void setCuartoCompartido(String cuartoCompartido) {
         this.cuartoCompartido = cuartoCompartido;
     }
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
     //Getters
     public String getUbicacionDeseada() {
         return ubicacionDeseada;
     }
-    public String getPresupuesto() {
+    public float getPresupuesto() {
         return presupuesto;
     }
     public int getCantBanosDeseados() {
@@ -52,7 +52,7 @@ public class Comprador extends Usuario {
     public String getCuartoCompartido() {
         return cuartoCompartido;
     }
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 

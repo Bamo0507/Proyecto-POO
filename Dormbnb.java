@@ -58,11 +58,11 @@ public class Dormbnb {
                 if (type.equals("C")){
 
                     String ubicacionDeseada = valores[6];
-                String presupuesto = valores[7];
+                float presupuesto = Float.parseFloat(valores[7]);
                 int cantBanosDeseados = Integer.parseInt(valores[8]);
                 String compartirU = valores[9];
                 String cuartoCompartido = valores[10];
-                int numero = Integer.parseInt(valores[11]);
+                String numero = valores[11];
 
                     compradores.add(new Comprador(nombre, correo, contrasena, fechaNacimiento, 
                 universidad, ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, 
@@ -96,6 +96,39 @@ public class Dormbnb {
             System.out.println("3. Salir");
             int eleccion = scanner.nextInt();
             if (eleccion == 1) {
+                String nombre = obtenerNombre();
+                String correo = obtenerCorreoValido();
+                String contrasena = obtenerContrasenaSegura();
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaComoString = formato.format(obtenerFechaNacimiento());
+                String universidad = seleccionarUniversidadDeseada();
+                String type = obtenerTipoUsuario();
+                
+
+                if (type.equals("Comprador")){
+
+                String ubicacionDeseada = seleccionarUbicacionDeseada();
+                System.out.println("Ingrese su presupuesto: ");
+                float presupuesto = solicitarPresupuesto();
+                System.out.println("Inrese la cantidad de baños que desea: ");
+                int cantBanosDeseados = seleccionarCantidadbanosDeseada();
+                System.out.println("Deseas compartir cuarto? ");
+                String compartirU = establecersino(); 
+                System.out.println("Deseas compartir cuarto? ");
+                String cuartoCompartido = establecersino();
+                System.out.println("Ingrese su numero de telefono ");
+                String numero = obtenerNumeroTelefonico();
+
+                    compradores.add(new Comprador(nombre, correo, contrasena, fechaComoString, 
+                universidad, ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, 
+                cuartoCompartido, numero));
+            }
+            
+                if (type.equals("V")){
+                    Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaComoString);
+                    vendedores.add(vendedor);
+                
+                }
                 // El usuario desea crear una cuenta
 
             } else if (eleccion == 2) {
@@ -658,7 +691,7 @@ public class Dormbnb {
     } 
 
     //Seleccionar cantidad de baños
-    public int seleccionarCantidadbanosDeseada() {
+    public static int seleccionarCantidadbanosDeseada() {
         Scanner scanner = new Scanner(System.in);
         int seleccionTipo = 0;
         int cantidadBanosDeseada = -1;
@@ -688,7 +721,7 @@ public class Dormbnb {
     }    
 
     //Devolver una respuesta afirmativa o negativa
-    public String establecersino() {
+    public static String establecersino() {
         Scanner scanner = new Scanner(System.in);
         int seleccionTipo = 0;
         String establecerSiNo = "";
