@@ -3,7 +3,7 @@ import java.sql.Statement;
 
 public class Variables {
     public static String basededatos = "proyectopoo";
-    public static String contrasena = "infobi";
+    public static String contrasena = "secret";
     public static String servidor = "5.161.118.98:33007";
     public static String usuario = "poo";
 
