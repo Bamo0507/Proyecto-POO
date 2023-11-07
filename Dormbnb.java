@@ -22,6 +22,7 @@ public class Dormbnb {
     private static boolean valid = true;
     
     public static void main(String[] args) throws NoSuchAlgorithmException{
+
         System.out.println("***********************************************************");
         System.out.println("*  __        _______ _     ____ ___  __  __ _____ _ _ _   *");
         System.out.println("*  \\ \\      / / ____| |   / ___/ _ \\|  \\/  | ____| | | |  *");
