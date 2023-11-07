@@ -44,44 +44,32 @@ public class Dormbnb {
         String archivoCSV = "Usuarios.CSV";
         Connection connection = null;
         
-        try {
-            connection = MySQL.getConnection();
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
-            BufferedReader br = new BufferedReader(new FileReader(archivoCSV)); 
             while ((linea = br.readLine()) != null) {
                 String[] valores = linea.split(",");
                 
+                // Extraer los valores del CSV
                 String type = valores[0];
                 String nombre = valores[1];
                 String correo = valores[2];
                 String contrasena = valores[3];
                 String fechaNacimiento = valores[4];
                 String universidad = valores[5];
+                
 
-                if (type.equals("C")) {
+                if (type.equals("C")){
+
                     String ubicacionDeseada = valores[6];
-                    float presupuesto = Float.parseFloat(valores[7]);
-                    int cantBanosDeseados = Integer.parseInt(valores[8]);
-                    String compartirU = valores[9];
-                    String cuartoCompartido = valores[10];
-                    String numero = valores[11];
+                float presupuesto = Float.parseFloat(valores[7]);
+                int cantBanosDeseados = Integer.parseInt(valores[8]);
+                String compartirU = valores[9];
+                String cuartoCompartido = valores[10];
+                String numero = valores[11];
 
-                    // Insertar datos en la tabla correspondiente (tabla_compradores)
-                    String query = "INSERT INTO tabla_compradores (nombre, correo, contrasena, fechaNacimiento, universidad, ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, cuartoCompartido, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    PreparedStatement preparedStatement = connection.prepareStatement(query);
-                    preparedStatement.setString(1, nombre);
-                    preparedStatement.setString(2, correo);
-                    preparedStatement.setString(3, contrasena);
-                    preparedStatement.setString(4, fechaNacimiento);
-                    preparedStatement.setString(5, universidad);
-                    preparedStatement.setString(6, ubicacionDeseada);
-                    preparedStatement.setFloat(7, presupuesto);
-                    preparedStatement.setInt(8, cantBanosDeseados);
-                    preparedStatement.setString(9, compartirU);
-                    preparedStatement.setString(10, cuartoCompartido);
-                    preparedStatement.setString(11, numero);
-
-                    preparedStatement.executeUpdate();
+                    compradores.add(new Comprador(nombre, correo, contrasena, fechaNacimiento, universidad, 
+                    ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, cuartoCompartido, numero));
                 }
                 if (type.equals("V")){
                     Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaNacimiento);
@@ -96,19 +84,12 @@ public class Dormbnb {
                     }else {
                         break;
                     }
-                    }}
-
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
+                    }
+                    vendedores.add(vendedor);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         while (valid==true) {
@@ -191,93 +172,52 @@ public class Dormbnb {
             }
         }
 
-        try {
-            connection = MySQL.getConnection();
-
-            // Inserción de datos de compradores
-            for (int i = 0; i < compradores.size(); i++) {
-                String tipo = "C";
-                String nombre = compradores.get(i).getNombre();
-                String correo = compradores.get(i).getCorreo();
-                String contrasena = compradores.get(i).getContrasena();
-                String fechaNacimiento = compradores.get(i).getFechaNacimiento();
-                String universidad = compradores.get(i).getUniversidad();
-                String ubicacionDeseada = compradores.get(i).getUbicacionDeseada();
-                float presupuesto = compradores.get(i).getPresupuesto();
-                int cantBanosDeseados = compradores.get(i).getCantBanosDeseados();
-                String compartirU = compradores.get(i).getCompartirU();
-                String cuartoCompartido = compradores.get(i).getCuartoCompartido();
-                String numero = compradores.get(i).getNumero();
-
-                String insertCompradorQuery = "INSERT INTO compradores (tipo, nombre, correo, contrasena, fechaNacimiento, universidad, ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, cuartoCompartido, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-                PreparedStatement preparedStatement = connection.prepareStatement(insertCompradorQuery);
-                preparedStatement.setString(1, tipo);
-                preparedStatement.setString(2, nombre);
-                preparedStatement.setString(3, correo);
-                preparedStatement.setString(4, contrasena);
-                preparedStatement.setString(5, fechaNacimiento);
-                preparedStatement.setString(6, universidad);
-                preparedStatement.setString(7, ubicacionDeseada);
-                preparedStatement.setFloat(8, presupuesto);
-                preparedStatement.setInt(9, cantBanosDeseados);
-                preparedStatement.setString(10, compartirU);
-                preparedStatement.setString(11, cuartoCompartido);
-                preparedStatement.setString(12, numero);
-
-                preparedStatement.executeUpdate();
-            }
-
-            // Inserción de datos de vendedores y dormitorios
-            for (int j = 0; j < vendedores.size(); j++) {
-                String tipo = "V";
-                String nombre = vendedores.get(j).getNombre();
-                String correo = vendedores.get(j).getCorreo();
-                String contrasena = vendedores.get(j).getContrasena();
-                String fechaNacimiento = vendedores.get(j).getFechaNacimiento();
-
-                String insertVendedorQuery = "INSERT INTO vendedores (tipo, nombre, correo, contrasena, fechaNacimiento) VALUES (?, ?, ?, ?, ?)";
-
-                PreparedStatement preparedStatement = connection.prepareStatement(insertVendedorQuery);
-                preparedStatement.setString(1, tipo);
-                preparedStatement.setString(2, nombre);
-                preparedStatement.setString(3, correo);
-                preparedStatement.setString(4, contrasena);
-                preparedStatement.setString(5, fechaNacimiento);
-
-                preparedStatement.executeUpdate();
-
-                for (int h = 0; h < vendedores.get(j).getDorms().size(); h++) {
-                    Dorm dormitorio = vendedores.get(j).getDorms().get(h);
-
-                    String ubicacionOfrecida = dormitorio.getUbicacionOfrecida();
-                    float costoVivienda = dormitorio.getCostoVivienda();
-                    int baniosVivienda = dormitorio.getBaniosVivienda();
-                    int cantPersonasCuarto = dormitorio.getCantPersonasCuarto();
-                    String uCompartida = dormitorio.getuCompartida();
-
-                    String insertDormitorioQuery = "INSERT INTO dormitorios (vendedor_id, ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida) VALUES ((SELECT LAST_INSERT_ID()), ?, ?, ?, ?, ?)";
-
-                    PreparedStatement dormitoryStatement = connection.prepareStatement(insertDormitorioQuery);
-                    dormitoryStatement.setString(1, ubicacionOfrecida);
-                    dormitoryStatement.setFloat(2, costoVivienda);
-                    dormitoryStatement.setInt(3, baniosVivienda);
-                    dormitoryStatement.setInt(4, cantPersonasCuarto);
-                    dormitoryStatement.setString(5, uCompartida);
-
-                    dormitoryStatement.executeUpdate();
+        try (FileWriter writer = new FileWriter(archivoCSV)) {
+            writer.write("tipo,nombre,correo,contrasena,fechaNacimiento,universidad/ubicacionOfrecida,ubicacionDeseada/costoVivienda,presupuesto/baniosVivienda,cantBanosDeseados/cantPersonasCuarto,compartirU/uCompartida,cuartoCompartido,numero\n");
+            for (int i = 0; i <compradores.size(); i++) {
+            writer.write("C," + compradores.get(i).getNombre()+","+
+            compradores.get(i).getCorreo() + "," +
+            compradores.get(i).getContrasena() + "," +
+            compradores.get(i).getFechaNacimiento() + "," +
+            compradores.get(i).getUniversidad() + "," +
+            compradores.get(i).getUbicacionDeseada() + "," +
+            compradores.get(i).getPresupuesto() + "," +
+            compradores.get(i).getCantBanosDeseados() + "," +
+            compradores.get(i).getCompartirU() + "," +
+            compradores.get(i).getCuartoCompartido() + "," +
+            compradores.get(i).getNumero()+"\n");
+        } 
+        for (int j = 0; j < vendedores.size(); j++) {
+            writer.write("V," + vendedores.get(j).getNombre() + "," +
+                    vendedores.get(j).getCorreo() + "," +
+                    vendedores.get(j).getContrasena() + "," +
+                    vendedores.get(j).getFechaNacimiento() + ",");
+        
+            for (int h = 0; h < vendedores.get(j).getDorms().size(); h++) {
+                Dorm dormitorio = vendedores.get(j).getDorms().get(h);
+                writer.write(dormitorio.getUbicacionOfrecida() + "," +
+                        dormitorio.getCostoVivienda() + "," +
+                        dormitorio.getBaniosVivienda() + "," +
+                        dormitorio.getCantPersonasCuarto() + "," +
+                        dormitorio.getuCompartida());
+        
+                // Comprobar si es el último dormitorio en la lista
+                if (h == vendedores.get(j).getDorms().size() - 1) {
+                    writer.write("\n");
+                } else {
+                    writer.write(",");
                 }
             }
-        } catch (SQLException e) {
+        }
+        
+        
+        
+        
+        
+        
+        }catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            System.out.println("Datos sobrescritos con éxito en " + archivoCSV); 
         }
     }
 
