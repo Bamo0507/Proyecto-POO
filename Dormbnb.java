@@ -45,17 +45,6 @@ public class Dormbnb {
         Connection connection = null;
         boolean logIn = false;
         
-        String SubMenuV = ("Bienvenido Vendedor:\n"+
-            "1. Agregar Dorm\n"+
-            "2. Ver mis dorms\n"+
-            "3. Salir");
-
-        String SubMenuC = ("Bienvenido Comprador: \n"+
-            "1. Ver todos los dorms disponibles\n"+
-            "2. Ver Dorms recomendados\n"+
-            "3. Reservar Dorm\n"+
-            "4. Salir");
-
         
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
@@ -85,14 +74,16 @@ public class Dormbnb {
                 }
                 if (type.equals("V")){
                     Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaNacimiento);
-                    for (int i = 6; i < valores.length; i += 5) {
+                    for (int i = 6; i < valores.length; i += 7) {
                         if (i + 4 < valores.length) {
                             String ubicacionOfrecida = valores[i];
                             float costoVivienda = Float.parseFloat(valores[i + 1]);
                             int baniosVivienda = Integer.parseInt(valores[i + 2]);
                             int cantPersonasCuarto = Integer.parseInt(valores[i + 3]);
                             String uCompartida = valores[i + 4];
-                        vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida);
+                            boolean disponible = Boolean.parseBoolean(valores[i+5]);
+                            boolean reservado = Boolean.parseBoolean(valores[i+6]);
+                        vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida, disponible, reservado);
                     }else {
                         break;
                     }
@@ -157,8 +148,14 @@ public class Dormbnb {
                         contrasena = MD5Hash.getMd5(contrasena); 
                         if ((compradores.get(i).getContrasena()).equals(contrasena) ) {
                             System.out.println("Contrasena correcta");
+                             logIn = true;
+
+                                while(logIn == true) {
+                                    subMenuC(logIn, compradores.get(i), SubMenuC, vendedores);
+                            }
                             } else {
                             System.out.println("Contrasena Incorrecta");
+                            
                 }}}
                 for (int j = 0; j < vendedores.size(); j++) {
                     if (vendedores.get(j).getCorreo().equals(correo)) {
@@ -167,9 +164,13 @@ public class Dormbnb {
                         contrasena = MD5Hash.getMd5(contrasena);
                         if ((vendedores.get(j).getContrasena()).equals(contrasena)) {
                             System.out.println("Contrasena correcta");
-                            } else {
+
+                            logIn = true;
+
+                                while(logIn == true) {
+                                    subMenuV(logIn, vendedores.get(j), SubMenuV);
+                            } }else {
                             System.out.println("Contrasena Incorrecta");
-                                System.out.println(SubMenuV);
 
                 }}
             }
@@ -769,5 +770,70 @@ public class Dormbnb {
         }
         return establecerSiNo;
     }   
+
+
+static String SubMenuV = ("Bienvenido Vendedor:\n"+
+            "1. Agregar Dorm\n"+
+            "2. Ver mis dorms\n"+
+            "3. Salir");
+
+
+    public static void subMenuV(boolean logIn, Vendedor vendedor, String subMenuV){
+        System.out.println(subMenuV);
+            Scanner scanner = new Scanner(System.in);
+            
+            String opcion = scanner.nextLine();
+            if (opcion.equals("1")) {
+                System.out.println("Ingrese");
+                String ubicacionOfrecida = scanner.next();
+                float costoVivienda = scanner.nextFloat();
+                int baniosVivienda = scanner.nextInt();
+                int cantPersonasCuarto = scanner.nextInt();
+                String uCompartida = scanner.next();
+                boolean disponible = true;
+                boolean reservado = false;
+                vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida, disponible, reservado);
+                }if(opcion.equals("2")){
+                for(int i=0; i<vendedor.getDorms().size(); i++){
+                    System.out.println(vendedor.getDorms().get(i).toString());
+            }}
+            if(opcion.equals("3")) {
+                logIn = false;
+            }else{
+                System.out.println("ingrese una opcion valida");
+            }
+            }
+
+static String SubMenuC = ("Bienvenido Comprador: \n"+
+            "1. Ver todos los dorms disponibles\n"+
+            "2. Ver Dorms recomendados\n"+
+            "3. Reservar Dorm\n"+
+            "4. Salir");
+
+public static void subMenuC(boolean logIn, Comprador comprador, String submenuC, ArrayList<Vendedor> vendedores){
+    Scanner scanner = new Scanner(System.in);
+
+            String opcion = scanner.nextLine();
+            System.out.println(submenuC);
+            if(opcion.equals("1")){
+                for(int i = 0; i <vendedores.size(); i++){{
+                    for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
+                        if(vendedores.get(i).getDorms().get(j).isDisponible() == true){
+                            System.out.println(vendedores.get(i).getDorms().get(j).toString());
+                    }
+                    }
+                }
+            }
+            }
+            if(opcion.equals("2")){
+                //validacion mas heavy
+            }
+            if(opcion.equals("3")){
+                //Bryan aqui manda un correo
+            }
+            else{
+                System.out.println("ingrese una opcion valida");
+            }
+    }
 
 }

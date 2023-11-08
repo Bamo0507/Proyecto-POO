@@ -11,12 +11,14 @@ public class Dorm {
     
 
     public Dorm(String ubicacionOfrecida, float costoVivienda, int baniosVivienda, int cantPersonasCuarto,
-            String uCompartida) {
+            String uCompartida, boolean disponible, boolean reservado) {
         this.ubicacionOfrecida = ubicacionOfrecida;
         this.costoVivienda = costoVivienda;
         this.baniosVivienda = baniosVivienda;
         this.cantPersonasCuarto = cantPersonasCuarto;
         this.uCompartida = uCompartida;
+        this.disponible = disponible;
+        this.reservado = reservado;
     }
     public void setCostoVivienda(float costoVivienda) {
         this.costoVivienda = costoVivienda;

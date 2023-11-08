@@ -17,9 +17,9 @@ public class Vendedor extends Usuario{
         this.universidad = universidad;
     }
     public void addDorm(String ubicacionOfrecida, float costoVivienda, int baniosVivienda, int cantPersonasCuarto,
-    String uCompartida){
+    String uCompartida, boolean disponible, boolean reservado) {
         dorms.add(new Dorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto,
-        uCompartida));
+        uCompartida, disponible, reservado));
         
     }
     
