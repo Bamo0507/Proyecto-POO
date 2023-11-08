@@ -43,7 +43,19 @@ public class Dormbnb {
 
         String archivoCSV = "Usuarios.CSV";
         Connection connection = null;
+        boolean logIn = false;
         
+        String SubMenuV = ("Bienvenido Vendedor:\n"+
+            "1. Agregar Dorm\n"+
+            "2. Ver mis dorms\n"+
+            "3. Salir");
+
+        String SubMenuC = ("Bienvenido Comprador: \n"+
+            "1. Ver todos los dorms disponibles\n"+
+            "2. Ver Dorms recomendados\n"+
+            "3. Reservar Dorm\n"+
+            "4. Salir");
+
         
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
@@ -157,6 +169,8 @@ public class Dormbnb {
                             System.out.println("Contrasena correcta");
                             } else {
                             System.out.println("Contrasena Incorrecta");
+                                System.out.println(SubMenuV);
+
                 }}
             }
                 

@@ -7,6 +7,8 @@ public class Comprador extends Usuario {
     private String cuartoCompartido;
     private String numero;
     private String universidad;
+    private Dorm reservado;
+    
     //Métodos propios de Comprador
     public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, float presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, String numero) {
         super(nombre, correo, contrasena, fechaNacimiento);

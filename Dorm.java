@@ -5,6 +5,8 @@ public class Dorm {
     private int baniosVivienda;
     private int cantPersonasCuarto;
     private String uCompartida;
+    private boolean disponible;
+    private boolean reservado;
 
     
 
@@ -46,7 +48,18 @@ public class Dorm {
     public void setUbicacionOfrecida(String ubicacionOfrecida) {
         this.ubicacionOfrecida = ubicacionOfrecida;
     }
-
+    public boolean isDisponible() {
+        return disponible;
+    }
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+    public boolean isReservado() {
+        return reservado;
+    }
+    public void setReservado(boolean reservado) {
+        this.reservado = reservado;
+    }
     public String toString() {
         return "Ubicacion: " + ubicacionOfrecida + " | Espacios por cuarto: " + cantPersonasCuarto + " | No. de Banios: " + baniosVivienda + "\n"+
         " | Habitacion compartida: " + uCompartida + " | Precio Alquiler:" + costoVivienda;
