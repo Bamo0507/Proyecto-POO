@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\Bryan\\Downloads\\activation-1.1.jar",
+        "c:\\Users\\Bryan\\Downloads\\javaee-api-8.0.1.jar",
+        "c:\\Users\\Bryan\\Downloads\\javax.mail.jar"
+    ]
+}
