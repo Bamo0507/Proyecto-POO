@@ -147,10 +147,11 @@ public class Dormbnb {
                 String cuartoCompartido = establecersino();
                 System.out.println("Ingrese su numero de telefono ");
                 String numero = obtenerNumeroTelefonico();
-
+                Dorm dorm = new Dorm("", -1, -1, -1,
+                "", false, false);
                     compradores.add(new Comprador(nombre, correo, contrasena, fechaComoString, 
                 universidad, ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, 
-                cuartoCompartido, numero));
+                cuartoCompartido, numero, dorm));
             }
             
                 if (type.equals("V")){
