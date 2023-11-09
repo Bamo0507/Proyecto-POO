@@ -81,9 +81,19 @@ public class Dormbnb {
                 String compartirU = valores[9];
                 String cuartoCompartido = valores[10];
                 String numero = valores[11];
+                 String ubicacionOfrecida = valores[12];
+                float costoVivienda = Float.parseFloat(valores[13]);
+                int baniosVivienda = Integer.parseInt(valores[14]);
+                int cantPersonasCuarto = Integer.parseInt(valores[15]);
+                String uCompartida = valores[16];
+                boolean disponible = Boolean.parseBoolean(valores[17]);
+                boolean reservado = Boolean.parseBoolean(valores[18]);
+
+                Dorm dorm = new Dorm(ubicacionOfrecida,costoVivienda, baniosVivienda, cantPersonasCuarto,
+                 uCompartida, disponible, reservado);
 
                     compradores.add(new Comprador(nombre, correo, contrasena, fechaNacimiento, universidad, 
-                    ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, cuartoCompartido, numero));
+                    ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, cuartoCompartido, numero, dorm));
                 }
                 if (type.equals("V")){
                     Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaNacimiento);
@@ -213,7 +223,14 @@ public class Dormbnb {
             compradores.get(i).getCantBanosDeseados() + "," +
             compradores.get(i).getCompartirU() + "," +
             compradores.get(i).getCuartoCompartido() + "," +
-            compradores.get(i).getNumero()+"\n");
+            compradores.get(i).getNumero()+
+            compradores.get(i).getReservado().getUbicacionOfrecida() + "," +
+            compradores.get(i).getReservado().getCostoVivienda() + "," +
+            compradores.get(i).getReservado().getBaniosVivienda() + "," +
+            compradores.get(i).getReservado().getCantPersonasCuarto() + "," +
+            compradores.get(i).getReservado().getuCompartida() +
+            compradores.get(i).getReservado().isDisponible() + "," +
+            compradores.get(i).getReservado().isReservado() + "\n");
         } 
         for (int j = 0; j < vendedores.size(); j++) {
             writer.write("V," + vendedores.get(j).getNombre() + "," +
@@ -227,7 +244,9 @@ public class Dormbnb {
                         dormitorio.getCostoVivienda() + "," +
                         dormitorio.getBaniosVivienda() + "," +
                         dormitorio.getCantPersonasCuarto() + "," +
-                        dormitorio.getuCompartida());
+                        dormitorio.getuCompartida()+ ","+
+                        dormitorio.isDisponible() + "," +
+                        dormitorio.isReservado());
         
                 // Comprobar si es el último dormitorio en la lista
                 if (h == vendedores.get(j).getDorms().size() - 1) {

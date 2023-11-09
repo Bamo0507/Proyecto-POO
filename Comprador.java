@@ -10,7 +10,7 @@ public class Comprador extends Usuario {
     private Dorm reservado;
     
     //Métodos propios de Comprador
-    public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, float presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, String numero) {
+    public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, float presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, String numero, Dorm dorm) {
         super(nombre, correo, contrasena, fechaNacimiento);
         this.ubicacionDeseada = ubicacionDeseada;
         this.presupuesto = presupuesto;
@@ -18,6 +18,7 @@ public class Comprador extends Usuario {
         this.compartirU = compartirU;
         this.cuartoCompartido = cuartoCompartido;
         this.numero = numero;
+        this.reservado = dorm;
     }
     //Setters
     public void setUbicacionDeseada(String ubicacionDeseada) {
@@ -90,11 +91,18 @@ public class Comprador extends Usuario {
     public String getUniversidad(){
         return this.universidad;
     }
+    public Dorm getReservado() {
+        return reservado;
+    }
+    public void setReservado(Dorm reservado) {
+        this.reservado = reservado;
+    }
 
     @Override
     public String toString() {
         return nombre + " previamente definiste tus preferencias como: \n" + "Cantidad de baños deseados: " + cantBanosDeseados+"\n" + "Ubiación deseada: " + ubicacionDeseada +"\n" + "Tú presupuesto es de: " + presupuesto + "\n" + "Tu cuarto será compartido: " + cuartoCompartido + "\n" + "Convivirás con gente de otras universidades: " + compartirU;
     }
+   
     
     
     
