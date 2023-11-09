@@ -4,9 +4,9 @@ public class Comprador extends Usuario {
     private float presupuesto;
     private int cantBanosDeseados;
     private String compartirU;
-    private String cuartoCompartido;
+    private String cuartoCompartido;//
     private String numero;
-    private String universidad;
+    private String universidad;//
     private Dorm reservado;
     
     //Métodos propios de Comprador

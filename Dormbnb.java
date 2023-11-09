@@ -16,7 +16,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import java.io.IOException;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
+import java.net.PasswordAuthentication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -795,7 +797,7 @@ static String SubMenuV = ("Bienvenido Vendedor:\n"+
             
             String opcion = scanner.nextLine();
             if (opcion.equals("1")) {
-                System.out.println("Ingrese");
+                System.out.println("Ingrese su");
                 String ubicacionOfrecida = scanner.next();
                 float costoVivienda = scanner.nextFloat();
                 int baniosVivienda = scanner.nextInt();
@@ -837,7 +839,24 @@ public static void subMenuC(boolean logIn, Comprador comprador, String submenuC,
             }
             }
             if(opcion.equals("2")){
-                //validacion mas heavy
+                for(int i = 0; i <vendedores.size(); i++){{
+                    for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
+                        Dorm dorm = vendedores.get(i).getDorms().get(j);
+                        if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
+                        && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
+                        (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
+                        && (comprador.getCuartoCompartido().equals("Si")) && dorm.isReservado() == false){//casi termiando
+                            System.out.println(vendedores.get(i).getDorms().get(j).toString());
+                            
+                    } if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
+                        && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
+                        (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
+                        && (comprador.getCuartoCompartido().equals("No")) && dorm.isReservado() == false){//casi termiando
+                            System.out.println(vendedores.get(i).getDorms().get(j).toString());
+                    }
+                    }
+                }
+            }
             }
             if(opcion.equals("3")){
                 //Bryan aqui manda un correo
