@@ -39,7 +39,7 @@ public class Dormbnb {
         ArrayList<Vendedor> vendedores = new ArrayList<>();
 
         //Crear objeto mailer (utilizado para enviar correos)
-        Mailer mailer = new Mailer();
+        //Mailer mailer = new Mailer();
 
         //hash maker
         MD5 MD5Hash = new MD5();
@@ -79,8 +79,8 @@ public class Dormbnb {
                 int baniosVivienda = Integer.parseInt(valores[14]);
                 int cantPersonasCuarto = Integer.parseInt(valores[15]);
                 String uCompartida = valores[16];
-                boolean disponible = Boolean.parseBoolean(valores[17]);
-                boolean reservado = Boolean.parseBoolean(valores[18]);
+                boolean disponible = (valores[17].equals("true")) ? true : false;
+                boolean reservado = (valores[18].equals("true")) ? true : false;
 
                 Dorm dorm = new Dorm(ubicacionOfrecida,costoVivienda, baniosVivienda, cantPersonasCuarto,
                  uCompartida, disponible, reservado);
@@ -97,8 +97,8 @@ public class Dormbnb {
                             int baniosVivienda = Integer.parseInt(valores[i + 2]);
                             int cantPersonasCuarto = Integer.parseInt(valores[i + 3]);
                             String uCompartida = valores[i + 4];
-                            boolean disponible = Boolean.parseBoolean(valores[i+5]);
-                            boolean reservado = Boolean.parseBoolean(valores[i+6]);
+                            boolean disponible = (valores[i + 5].equals("true")) ? true : false;
+                            boolean reservado = (valores[i + 6].equals("true")) ? true : false;
                         vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida, disponible, reservado);
                     }else {
                         break;
@@ -168,7 +168,7 @@ public class Dormbnb {
                              logIn = true;
 
                                 while(logIn == true) {
-                                    subMenuC(logIn, compradores.get(i), SubMenuC, vendedores);
+                                    logIn = subMenuC(logIn, compradores.get(i), SubMenuC, vendedores);
                             }
                             } else {
                             System.out.println("Contrasena Incorrecta");
@@ -185,7 +185,7 @@ public class Dormbnb {
                             logIn = true;
 
                                 while(logIn == true) {
-                                    subMenuV(logIn, vendedores.get(j), SubMenuV);
+                                    logIn = subMenuV(logIn, vendedores.get(j), SubMenuV);
                             } }else {
                             System.out.println("Contrasena Incorrecta");
 
@@ -202,9 +202,7 @@ public class Dormbnb {
             } else {
                 System.out.println("Opción no válida. Por favor, elige una opción válida.");
             }
-        }
-
-        try (FileWriter writer = new FileWriter(archivoCSV)) {
+            try (FileWriter writer = new FileWriter(archivoCSV)) {
             writer.write("tipo,nombre,correo,contrasena,fechaNacimiento,universidad/ubicacionOfrecida,ubicacionDeseada/costoVivienda,presupuesto/baniosVivienda,cantBanosDeseados/cantPersonasCuarto,compartirU/uCompartida,cuartoCompartido,numero\n");
             for (int i = 0; i <compradores.size(); i++) {
             writer.write("C," + compradores.get(i).getNombre()+","+
@@ -217,12 +215,12 @@ public class Dormbnb {
             compradores.get(i).getCantBanosDeseados() + "," +
             compradores.get(i).getCompartirU() + "," +
             compradores.get(i).getCuartoCompartido() + "," +
-            compradores.get(i).getNumero()+
+            compradores.get(i).getNumero()+ ","+
             compradores.get(i).getReservado().getUbicacionOfrecida() + "," +
             compradores.get(i).getReservado().getCostoVivienda() + "," +
             compradores.get(i).getReservado().getBaniosVivienda() + "," +
             compradores.get(i).getReservado().getCantPersonasCuarto() + "," +
-            compradores.get(i).getReservado().getuCompartida() +
+            compradores.get(i).getReservado().getuCompartida() + "," +
             compradores.get(i).getReservado().isDisponible() + "," +
             compradores.get(i).getReservado().isReservado() + "\n");
         } 
@@ -254,6 +252,9 @@ public class Dormbnb {
             e.printStackTrace();
             System.out.println("Datos sobrescritos con éxito en " + archivoCSV); 
         }
+        }
+
+        
     }
 
     //Método para asegurarse que se ingrese un entero en los campos necesarios
@@ -798,7 +799,7 @@ static String SubMenuV = ("Bienvenido Vendedor:\n"+
             "3. Salir");
 
 
-    public static void subMenuV(boolean logIn, Vendedor vendedor, String subMenuV){
+    public static boolean subMenuV(boolean logIn, Vendedor vendedor, String subMenuV){
         System.out.println(subMenuV);
             Scanner scanner = new Scanner(System.in);
             
@@ -817,15 +818,18 @@ static String SubMenuV = ("Bienvenido Vendedor:\n"+
                 boolean disponible = true;
                 boolean reservado = false;
                 vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida, disponible, reservado);
+                logIn = true;
                 }if(opcion.equals("2")){
                 for(int i=0; i<vendedor.getDorms().size(); i++){
                     System.out.println(vendedor.getDorms().get(i).toString());
+                    logIn = true;
             }}
             if(opcion.equals("3")) {
                 logIn = false;
             }else{
                 System.out.println("ingrese una opcion valida");
             }
+            return logIn;
             }
 
 static String SubMenuC = ("Bienvenido Comprador: \n"+
@@ -834,9 +838,10 @@ static String SubMenuC = ("Bienvenido Comprador: \n"+
             "3. Reservar Dorm\n"+
             "4. Salir");
 
-public static void subMenuC(boolean logIn, Comprador comprador, String submenuC, ArrayList<Vendedor> vendedores){
+public static boolean subMenuC(boolean logIn, Comprador comprador, String submenuC, ArrayList<Vendedor> vendedores){
     Scanner scanner = new Scanner(System.in);
 
+    logIn = true;
             String opcion = scanner.nextLine();
             System.out.println(submenuC);
             if(opcion.equals("1")){
@@ -844,6 +849,7 @@ public static void subMenuC(boolean logIn, Comprador comprador, String submenuC,
                     for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                         if(vendedores.get(i).getDorms().get(j).isDisponible() == true){
                             System.out.println(vendedores.get(i).getDorms().get(j).toString());
+                            logIn = true;
                     }
                     }
                 }
@@ -858,12 +864,14 @@ public static void subMenuC(boolean logIn, Comprador comprador, String submenuC,
                         (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
                         && (comprador.getCuartoCompartido().equals("Si")) && dorm.isReservado() == false){//casi termiando
                             System.out.println(vendedores.get(i).getDorms().get(j).toString());
-                            
+                            logIn = true;
+
                     } if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
                         && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
                         (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
                         && (comprador.getCuartoCompartido().equals("No")) && dorm.isReservado() == false){//casi termiando
                             System.out.println(vendedores.get(i).getDorms().get(j).toString());
+                            logIn = true;
                     }
                     }
                 }
@@ -872,9 +880,12 @@ public static void subMenuC(boolean logIn, Comprador comprador, String submenuC,
             if(opcion.equals("3")){
                 //Bryan aqui manda un correo
             }
-            else{
+            if(opcion.equals("4")) {
+                logIn = false;
+            }else{
                 System.out.println("ingrese una opcion valida");
             }
+        return logIn;
     }
 
 }
