@@ -89,7 +89,7 @@ public class Dormbnb {
                     ubicacionDeseada, presupuesto, cantBanosDeseados, compartirU, cuartoCompartido, numero, dorm));
                 }
                 if (type.equals("V")){
-                    Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaNacimiento);
+                    Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaNacimiento,universidad);
                     for (int i = 6; i < valores.length; i += 7) {
                         if (i + 4 < valores.length) {
                             String ubicacionOfrecida = valores[i];
@@ -147,8 +147,8 @@ public class Dormbnb {
                 cuartoCompartido, numero, dorm));
             }
             
-                if (type.equals("V")){
-                    Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaComoString);
+                if (type.equals("Vendedor")){
+                    Vendedor vendedor = new Vendedor(nombre,correo,contrasena,fechaComoString,universidad);
                     vendedores.add(vendedor);
                 
                 }
@@ -225,10 +225,12 @@ public class Dormbnb {
             compradores.get(i).getReservado().isReservado() + "\n");
         } 
         for (int j = 0; j < vendedores.size(); j++) {
+            vendedores.get(j).toString();
             writer.write("V," + vendedores.get(j).getNombre() + "," +
                     vendedores.get(j).getCorreo() + "," +
                     vendedores.get(j).getContrasena() + "," +
-                    vendedores.get(j).getFechaNacimiento() + ",");
+                    vendedores.get(j).getFechaNacimiento() + "," + 
+                    vendedores.get(j).getUniversidad() + ",");
         
             for (int h = 0; h < vendedores.get(j).getDorms().size(); h++) {
                 Dorm dormitorio = vendedores.get(j).getDorms().get(h);
@@ -806,18 +808,19 @@ static String SubMenuV = ("Bienvenido Vendedor:\n"+
             String opcion = scanner.nextLine();
             if (opcion.equals("1")) {
                 System.out.println("Ingrese su Ubicacion: ");
-                String ubicacionOfrecida = scanner.next();
+                String ubicacionOfrecida = seleccionarUbicacionDeseada();
                 System.out.println("Ingrese el costo de su dorm: ");
-                float costoVivienda = scanner.nextFloat();
+                float costoVivienda = solicitarPresupuesto();
                 System.out.println("Ingrese el numero de banios: ");
-                int baniosVivienda = scanner.nextInt();
+                int baniosVivienda = seleccionarCantidadbanosDeseada();
                 System.out.println("Ingrese la cantidad de personas qu epuede albergar: ");
                 int cantPersonasCuarto = scanner.nextInt();
                 System.out.println("Ingrese si es un dorm multi-univeritario");
-                String uCompartida = scanner.next();
+                String uCompartida = establecersino();
                 boolean disponible = true;
                 boolean reservado = false;
                 vendedor.addDorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto, uCompartida, disponible, reservado);
+
                 logIn = true;
                 }if(opcion.equals("2")){
                 for(int i=0; i<vendedor.getDorms().size(); i++){

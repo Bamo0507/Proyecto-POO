@@ -7,8 +7,9 @@ public class Vendedor extends Usuario{
     private ArrayList<Dorm> dorms = new ArrayList<>(); 
 
     //Setters
-    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento) {
+    public Vendedor(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad) {
         super(nombre, correo, contrasena, fechaNacimiento);
+        this.universidad = universidad;
     }
     public void setCantMensajesPendientes(int cantMensajesPendientes) {
         this.cantMensajesPendientes = cantMensajesPendientes;
@@ -18,7 +19,7 @@ public class Vendedor extends Usuario{
     }
     public void addDorm(String ubicacionOfrecida, float costoVivienda, int baniosVivienda, int cantPersonasCuarto,
     String uCompartida, boolean disponible, boolean reservado) {
-        dorms.add(new Dorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto,
+        this.dorms.add(new Dorm(ubicacionOfrecida, costoVivienda, baniosVivienda, cantPersonasCuarto,
         uCompartida, disponible, reservado));
         
     }
