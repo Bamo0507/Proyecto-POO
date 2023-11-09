@@ -804,11 +804,15 @@ static String SubMenuV = ("Bienvenido Vendedor:\n"+
             
             String opcion = scanner.nextLine();
             if (opcion.equals("1")) {
-                System.out.println("Ingrese su");
+                System.out.println("Ingrese su Ubicacion: ");
                 String ubicacionOfrecida = scanner.next();
+                System.out.println("Ingrese el costo de su dorm: ");
                 float costoVivienda = scanner.nextFloat();
+                System.out.println("Ingrese el numero de banios: ");
                 int baniosVivienda = scanner.nextInt();
+                System.out.println("Ingrese la cantidad de personas qu epuede albergar: ");
                 int cantPersonasCuarto = scanner.nextInt();
+                System.out.println("Ingrese si es un dorm multi-univeritario");
                 String uCompartida = scanner.next();
                 boolean disponible = true;
                 boolean reservado = false;
