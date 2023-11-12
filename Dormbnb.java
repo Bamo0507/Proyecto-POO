@@ -895,6 +895,7 @@ static String SubMenuC = ("Bienvenido Comprador: \n"+
             "4. Salir");
 
 public static boolean subMenuC(boolean logIn, Comprador comprador, String submenuC, ArrayList<Vendedor> vendedores){
+    Mailer mailer = new Mailer();
     Scanner scanner = new Scanner(System.in);
     boolean opcionValida = false;
     logIn = true;
@@ -915,6 +916,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
         }
         else if(opcion.equals("2")){
             opcionValida = true;
+            System.out.println("Si no se le llega a mostrar nada, es porque de momento no contamos con dorms que se adecúen a sus necesidades.");
             for(int i = 0; i <vendedores.size(); i++){{
                 for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                     Dorm dorm = vendedores.get(i).getDorms().get(j);
@@ -939,6 +941,8 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
         }
         else if(opcion.equals("3")){
             opcionValida = true;
+            System.out.println("Si no se le llega a mostrar nada, es porque de momento no contamos con dorms que se adecúen a sus necesidades.");
+            System.out.println("De ser este el caso, tendrá que colocar '0-0'.");
             for(int i = 0; i <vendedores.size(); i++){
                 for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                     Dorm dorm = vendedores.get(i).getDorms().get(j);
@@ -960,7 +964,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                     
                 }
                 try {
-                    System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");
+                    System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");;
                     String code = scanner.nextLine();
                     String[] partes = code.split("-");
                 
@@ -975,15 +979,14 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                         comprador.getReservado().setuCompartida(vendedores.get(i).getDorms().get(j).getuCompartida());
                         vendedores.get(i).getDorms().get(j).setDisponible(false);
                         vendedores.get(i).getDorms().get(j).setReservado(true);
-
-
-                        enviarCorreo(comprador.getCorreo(), vendedores.get(i).getDorms().get(j).toString());
+                        mailer.enviarCorreo(comprador.getCorreo(), vendedores.get(i).getDorms().get(j).toString());
                     } else {
                         System.out.println("Los índices están fuera de rango.");
                     }
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     System.out.println("Error: Ingrese un formato válido (#-#).");
-                }                
+                }   
+                System.out.println("Por favor, apache ENTER para continuar.");             
         }
         else if(opcion.equals("4")) {
             opcionValida = true;
