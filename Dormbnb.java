@@ -921,14 +921,14 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                     if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
                     && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
                     (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
-                    && (comprador.getCuartoCompartido().equals("Si")) && dorm.isReservado() == false){//casi termiando
+                    && (comprador.getCuartoCompartido().equals("Si")) && dorm.getCantPersonasCuarto() > 0 && dorm.isReservado() == false){//casi termiando
                         System.out.println(vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
 
                 } if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
                     && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
                     (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
-                    && (comprador.getCuartoCompartido().equals("No")) && dorm.isReservado() == false){//casi termiando
+                    && (comprador.getCuartoCompartido().equals("No")) && dorm.getCantPersonasCuarto() == 0 && dorm.isReservado() == false){//casi termiando
                         System.out.println(vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
                     }
@@ -939,7 +939,28 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
         }
         else if(opcion.equals("3")){
             opcionValida = true;
-            //Bryan aqui manda un correo
+            for(int i = 0; i <vendedores.size(); i++){
+                for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
+                    Dorm dorm = vendedores.get(i).getDorms().get(j);
+                    if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
+                    && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
+                    (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
+                    && (comprador.getCuartoCompartido().equals("Si")) && dorm.getCantPersonasCuarto() > 0 && dorm.isReservado() == false){//casi termiando
+                        System.out.println("Coidgo: "+ i +"-" + j + " "+ vendedores.get(i).getDorms().get(j).toString());
+                        logIn = true;
+
+                } if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
+                    && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
+                    (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
+                    && (comprador.getCuartoCompartido().equals("No")) && dorm.getCantPersonasCuarto() == 0 && dorm.isReservado() == false){//casi termiando
+                        System.out.println("Coidgo: "+ i +"-" + j + " "+ vendedores.get(i).getDorms().get(j).toString());
+                        logIn = true;
+                    }
+                    }
+                }
+                System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");
+                String code = scanner.nextLine();
+                
         }
         else if(opcion.equals("4")) {
             opcionValida = true;
