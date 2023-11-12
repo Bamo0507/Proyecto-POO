@@ -957,10 +957,33 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                         logIn = true;
                     }
                     }
+                    
                 }
-                System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");
-                String code = scanner.nextLine();
+                try {
+                    System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");
+                    String code = scanner.nextLine();
+                    String[] partes = code.split("-");
                 
+                    int i = Integer.parseInt(partes[0]);
+                    int j = Integer.parseInt(partes[1]);
+                
+                    if (i >= 0 && i < vendedores.size() && j >= 0 && j < vendedores.get(i).getDorms().size()) {
+                        comprador.getReservado().setBaniosVivienda(vendedores.get(i).getDorms().get(j).getBaniosVivienda());
+                        comprador.getReservado().setUbicacionOfrecida(vendedores.get(i).getDorms().get(j).getUbicacionOfrecida());
+                        comprador.getReservado().setCostoVivienda(vendedores.get(i).getDorms().get(j).getCostoVivienda());
+                        comprador.getReservado().setCantPersonasCuarto(vendedores.get(i).getDorms().get(j).getCantPersonasCuarto());
+                        comprador.getReservado().setuCompartida(vendedores.get(i).getDorms().get(j).getuCompartida());
+                        vendedores.get(i).getDorms().get(j).setDisponible(false);
+                        vendedores.get(i).getDorms().get(j).setReservado(true);
+
+
+                        enviarCorreo(comprador.getCorreo(), vendedores.get(i).getDorms().get(j).toString());
+                    } else {
+                        System.out.println("Los índices están fuera de rango.");
+                    }
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Error: Ingrese un formato válido (#-#).");
+                }                
         }
         else if(opcion.equals("4")) {
             opcionValida = true;
