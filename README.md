@@ -9,3 +9,7 @@ javee-api-8.0.1.jar
 javax.mail.jar
 
 Si se utiliza Visual Studio Code, estas se deben colocar en el apartado de "Referenced Libraries".
+Lo podrás encontrar en el extremo izquierdo hacia abajo.
+
+Si llegas a tener problema utilizando este método puedes probar descargar el ZIP que se encuentra en el repositorio.
+Este contiene las tres librerías necesarias.
