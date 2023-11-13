@@ -955,17 +955,25 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
             for(int i = 0; i <vendedores.size(); i++){
                 for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                     Dorm dorm = vendedores.get(i).getDorms().get(j);
-                    if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
-                    && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
-                    (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
-                    && (comprador.getCuartoCompartido().equals("Si")) && dorm.getCantPersonasCuarto() > 0 && dorm.isReservado() == false){//casi termiando
+                    if(dorm.isDisponible() == true  
+                    && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
+                    && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) 
+                    && (comprador.getCantBanosDeseados() >= dorm.getBaniosVivienda()) 
+                    && comprador.getCompartirU().equals(dorm.getuCompartida()) 
+                    && (comprador.getCuartoCompartido().equals("Si")) 
+                    && dorm.getCantPersonasCuarto() > 0 
+                    && dorm.isReservado() == false){//casi termiando
                         System.out.println("Coidgo: "+ i +"-" + j + " "+ vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
 
-                } if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
-                    && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
-                    (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
-                    && (comprador.getCuartoCompartido().equals("No")) && dorm.getCantPersonasCuarto() == 0 && dorm.isReservado() == false){//casi termiando
+                } if(dorm.isDisponible() == true  
+                    && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
+                    && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) 
+                    && (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) 
+                    && comprador.getCompartirU().equals(dorm.getuCompartida()) 
+                    && (comprador.getCuartoCompartido().equals("No")) 
+                    && dorm.getCantPersonasCuarto() == 1 
+                    && dorm.isReservado() == false){//casi termiando
                         System.out.println("Coidgo: "+ i +"-" + j + " "+ vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
                     }
