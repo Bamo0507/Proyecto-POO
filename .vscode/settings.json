@@ -3,6 +3,9 @@
         "lib/**/*.jar",
         "c:\\Users\\Bryan\\Downloads\\activation-1.1.jar",
         "c:\\Users\\Bryan\\Downloads\\javaee-api-8.0.1.jar",
-        "c:\\Users\\Bryan\\Downloads\\javax.mail.jar"
+        "c:\\Users\\Bryan\\Downloads\\javax.mail.jar",
+        "c:\\Users\\luisf\\Desktop\\U\\Segundo Semestre\\POO\\activation-1.1.jar",
+        "c:\\Users\\luisf\\Desktop\\U\\Segundo Semestre\\POO\\javaee-api-8.0.1.jar",
+        "c:\\Users\\luisf\\Desktop\\U\\Segundo Semestre\\POO\\javax.mail-1.6.2.jar"
     ]
 }
