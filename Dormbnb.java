@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.*;
+
+import javax.sound.sampled.SourceDataLine;
+
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
@@ -897,7 +900,8 @@ static String SubMenuC = ("Bienvenido Comprador: \n"+
             "1. Ver todos los dorms disponibles\n"+
             "2. Ver Dorms recomendados\n"+
             "3. Reservar Dorm\n"+
-            "4. Salir");
+            "4. Ver reserva\n"+
+            "5. Salir");
 
 public static boolean subMenuC(boolean logIn, Comprador comprador, String submenuC, ArrayList<Vendedor> vendedores){
     Mailer mailer = new Mailer();
@@ -996,6 +1000,9 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                 System.out.println("Por favor, apache ENTER para continuar.");             
         }
         else if(opcion.equals("4")) {
+            System.out.println(comprador.getReservado().toString());
+            logIn = true;
+        }else if(opcion.equals("5")) {
             opcionValida = true;
             logIn = false;
         }
