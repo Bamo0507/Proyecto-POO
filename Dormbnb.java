@@ -609,24 +609,21 @@ public class Dormbnb {
                     ubicacionDeseada = "Zona 19";
                     break;
                 case 20:
-                    ubicacionDeseada = "Zona 20";
-                    break;
-                case 21:
                     ubicacionDeseada = "Zona 21";
                     break;
-                case 22:
+                case 21:
                     ubicacionDeseada = "Zona 24";
                     break;
-                case 23:
+                case 22:
                     ubicacionDeseada = "Zona 25";
                     break;
-                case 24:
+                case 23:
                     ubicacionDeseada = "San Cristobal";
                     break;
-                case 25:
+                case 24:
                     ubicacionDeseada = "Carretera al Salvador";
                     break;
-                case 26:
+                case 25:
                     ubicacionDeseada = "Mixco";
                     break;
                 default:
