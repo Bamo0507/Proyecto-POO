@@ -5,8 +5,9 @@ C,Bryan2,Bryan2@gmail.com,3fd1b7daeca6f153dc20d290116d4b18,10/10/0010,null,Zona 
 C,Bryan3,Bryan3@gmail.com,f7fd890e720e149dd335fd89bd28a7a4,10/10/0010,null,Zona 1,15000.0,1,Si,No,15985243,,-1.0,-1,-1,,false,false
 C,Bryan5,Bryan@gmail.com,1085757b94129e0aeb1857fc0e62865f,01/01/0001,null,Zona 10,15062.0,1,Si,Si,12345123,,-1.0,-1,-1,,false,false
 C,Bryan7,Bryan7@gmail.com,007d9dbc3eb6d8ff457d08d3faec244d,07/07/0007,null,Zona 16,157000.0,1,Si,No,78982345,Zona 15,1909.0,1,3,Si,false,false
-C,Luis,luisfran1164@gmail.com,b538aa5353fa845f0da47af7d8a02633,11/05/2005,null,Zona 16,10000.0,1,Si,No,30303030,Zona 15,2.0,2,2,No,false,false
+C,Luis,luisfran1164@gmail.com,b538aa5353fa845f0da47af7d8a02633,11/05/2005,null,Zona 10,10000.0,1,No,Si,30303030,Zona 15,2.0,2,2,No,false,false
 C,EZ,Ez@gmail.com,ef3ef267648b8825870513e772033270,01/01/0001,null,Zona 11,1.0E9,2,Si,No,88888888,Zona 15,1909.0,1,3,Si,false,false
+C,A,a@gmail.com,5cad57bc6d123144c4ae17d03662acd1,01/01/0001,null,Zona 10,1.0E7,1,No,No,12345678,,-1.0,-1,-1,,false,false
 V,Q,q@gmail.com,febaa4d9be541968201c83bccfa489b9,11/01/0001,null,Zona 15,1909.0,1,3,Si,false,true,Zona 15,2.0,2,2,No,false,true,
 V,Bryan1,Bryan1@gmail.com,a2300858a37e8bd0bc81c1dc01104bc6,10/08/0023,Universidad del Valle de Guatemala,Zona 10,5000.0,1,1,Si,true,false,Zona 10,10000.0,1,1,No,true,false,Zona 10,15000.0,1,1,Si,true,false,Zona 10,155555.0,0,2,Si,true,false,
 V,Bryan4,Bryan4@gmail.com,d68c7376519140ae119817a19f8789e7,10/10/0010,Universidad del Valle de Guatemala,
