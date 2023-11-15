@@ -53,6 +53,7 @@ public class Dormbnb {
         String archivoCSV = "Usuarios.CSV";
         Connection connection = null;
         boolean logIn = false;
+        boolean validacion1 = false;
         
         
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
@@ -181,11 +182,14 @@ public class Dormbnb {
                 valid = true;
             } else if (eleccion.equals("2")) {
                 // El usuario desea iniciar sesión
+                logIn = false;
                 System.out.println("Ingresa tu correo electrónico:");
-                boolean validacion1 = false;
+                validacion1 = false;
                 String correo = scanner.next();
+                boolean systemON = true;
                 for (int i = 0; i <compradores.size(); i++) {
-                    if (compradores.get(i).getCorreo().equals(correo)) {
+                    if(systemON){
+                        if (compradores.get(i).getCorreo().equals(correo)) {
                         validacion1 = true;
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
@@ -197,13 +201,15 @@ public class Dormbnb {
 
                                 while(logIn == true) {
                                     logIn = subMenuC(logIn, compradores.get(i), SubMenuC, vendedores);
+                                    if(logIn == false){
+                                        systemON = false;
+                                    }
                             }
                             } else {
-                            System.out.println("Contrasena Incorrecta");
-                            
-                }}}
-                if(validacion1 = false){
-                    System.out.println("No se ha encontrado un usuario con ese correo electrónico :(\n");
+                            System.out.println("Contrasena Incorrecta");          
+                }}
+
+                    }
                 }
                 for (int j = 0; j < vendedores.size(); j++) {
                     if (vendedores.get(j).getCorreo().equals(correo)) {
@@ -212,16 +218,18 @@ public class Dormbnb {
                         contrasena = MD5Hash.getMd5(contrasena);
                         if ((vendedores.get(j).getContrasena()).equals(contrasena)) {
                             System.out.println("Contrasena correcta");
-
+                            validacion1 = true;
                             logIn = true;
-
                                 while(logIn == true) {
                                     logIn = subMenuV(logIn, vendedores.get(j), SubMenuV);
                             } }else {
                             System.out.println("Contrasena Incorrecta");
 
-                }}
-            }
+                    }}
+                }
+                if(!validacion1){
+                    System.out.println("No se ha encontrado un usuario con ese correo electrónico :(\n");
+                }
                 
                 // Verificar al usuario en la base de datos 
                 // Si deseas agregar autenticación de usuario,
@@ -866,7 +874,7 @@ static String SubMenuV = ("Bienvenido Vendedor:\n"+
                 System.out.println("Ingrese el costo de su dorm: ");
                 float costoVivienda = solicitarPresupuesto();
                 System.out.println("~~~~~~~~~~~~~~  ~~~~~~~~~~~  ~~~~~~~~~~  ~~~~~~~~~~  ~~~~~~~~~~~~");
-                System.out.println("Ingrese el numero de banios: ");
+                System.out.println("Ingrese el numero de baños: ");
                 int baniosVivienda = seleccionarCantidadbanosDeseada();
                 System.out.println("~~~~~~~~~~~~~~  ~~~~~~~~~~~  ~~~~~~~~~~  ~~~~~~~~~~  ~~~~~~~~~~~~");
                 System.out.println("Ingrese la cantidad de personas que puede albergar: ");
@@ -922,7 +930,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
         }
         else if(opcion.equals("2")){
             opcionValida = true;
-            System.out.println("Si no se le llega a mostrar nada, es porque de momento no contamos con dorms que se adecúen a sus necesidades.");
+            boolean validacion2 = false;
             for(int i = 0; i <vendedores.size(); i++){{
                 for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                     Dorm dorm = vendedores.get(i).getDorms().get(j);
@@ -930,25 +938,31 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                     && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
                     (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
                     && (comprador.getCuartoCompartido().equals("Si")) && dorm.getCantPersonasCuarto() > 0 && dorm.isReservado() == false){//casi termiando
-                        System.out.println("Coidgo: "+ i +"-" + j + " "+vendedores.get(i).getDorms().get(j).toString());
+                        System.out.println("Codigo: "+ i +"-" + j + " "+vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
+                        validacion2 = true;
 
                 } if(dorm.isDisponible() == true  && comprador.getUbicacionDeseada().equals(dorm.getUbicacionOfrecida()) 
                     && (comprador.getPresupuesto() >= dorm.getCostoVivienda()) && 
                     (comprador.getCantBanosDeseados() == dorm.getBaniosVivienda()) && comprador.getCompartirU().equals(dorm.getuCompartida()) 
                     && (comprador.getCuartoCompartido().equals("No")) && dorm.getCantPersonasCuarto() == 0 && dorm.isReservado() == false){//casi termiando
-                        System.out.println("Coidgo: "+ i +"-" + j + " "+vendedores.get(i).getDorms().get(j).toString());
+                        System.out.println("Codigo: "+ i +"-" + j + " "+vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
+                        validacion2 = true;
+
                     }
                     }
                 }
+            }
+            if(!validacion2){
+                System.out.println("Lamentamos informarte que de momento no contamos con dorms para tu ubicación :(");
             }
             System.out.println("\nApache ENTER para continuar");
         }
         else if(opcion.equals("3")){
             opcionValida = true;
-            System.out.println("Si no se le llega a mostrar nada, es porque de momento no contamos con dorms que se adecúen a sus necesidades.");
-            System.out.println("De ser este el caso, tendrá que colocar '0-0'.");
+            boolean validacion3 = false;
+            
             for(int i = 0; i <vendedores.size(); i++){
                 for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                     Dorm dorm = vendedores.get(i).getDorms().get(j);
@@ -961,7 +975,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
 
                                     System.out.println("Coidgo: "+ i +"-" + j + " "+ vendedores.get(i).getDorms().get(j).toString());
                                     logIn = true;
-
+                                    validacion3 = true;
                             }
                         }
                         }
@@ -978,6 +992,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                             if((comprador.getCuartoCompartido().equals("No"))){
                                     System.out.println("Coidgo: "+ i +"-" + j + " "+ vendedores.get(i).getDorms().get(j).toString());
                                     logIn = true;
+                                    validacion3 = true;
                         }
                         }
                         }
@@ -987,36 +1002,51 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
                     }
                     
                 }
-                try {
-                    System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");;
-                    String code = scanner.nextLine();
-                    String[] partes = code.split("-");
-                
-                    int i = Integer.parseInt(partes[0]);
-                    int j = Integer.parseInt(partes[1]);
-                
-                    if (i >= 0 && i < vendedores.size() && j >= 0 && j < vendedores.get(i).getDorms().size()) {
-                        comprador.getReservado().setBaniosVivienda(vendedores.get(i).getDorms().get(j).getBaniosVivienda());
-                        comprador.getReservado().setUbicacionOfrecida(vendedores.get(i).getDorms().get(j).getUbicacionOfrecida());
-                        comprador.getReservado().setCostoVivienda(vendedores.get(i).getDorms().get(j).getCostoVivienda());
-                        comprador.getReservado().setCantPersonasCuarto(vendedores.get(i).getDorms().get(j).getCantPersonasCuarto());
-                        comprador.getReservado().setuCompartida(vendedores.get(i).getDorms().get(j).getuCompartida());
-                        vendedores.get(i).getDorms().get(j).setDisponible(false);
-                        vendedores.get(i).getDorms().get(j).setReservado(true);
-
-                        mailer.enviarCorreo(comprador.getCorreo(), "Reservaste el Dorm: " + vendedores.get(i).getDorms().get(j).toString());
-                        mailer.enviarCorreo(vendedores.get(i).getCorreo(), "Un usuario esta interesado en tu Dorm: \n" + vendedores.get(i).getDorms().get(j).toString() +"\n"+ "Su numero de telefono es: "+ comprador.getNumero());
-                    } else {
-                        System.out.println("Los índices están fuera de rango.");
-                    }
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Error: Ingrese un formato válido (#-#).");
-                }   
-                System.out.println("Por favor, apache ENTER para continuar.");             
+                if(validacion3 == true){
+                    try {
+                    while(logIn){
+                        System.out.println("Ingrese el codigo del dorm que desea reservar(#-#): ");;
+                        String code = scanner.nextLine();
+                        String[] partes = code.split("-");
+                    
+                        int i = Integer.parseInt(partes[0]);
+                        int j = Integer.parseInt(partes[1]);
+                    
+                        if (i >= 0 && i < vendedores.size() && j >= 0 && j < vendedores.get(i).getDorms().size()) {
+                            comprador.getReservado().setBaniosVivienda(vendedores.get(i).getDorms().get(j).getBaniosVivienda());
+                            comprador.getReservado().setUbicacionOfrecida(vendedores.get(i).getDorms().get(j).getUbicacionOfrecida());
+                            comprador.getReservado().setCostoVivienda(vendedores.get(i).getDorms().get(j).getCostoVivienda());
+                            comprador.getReservado().setCantPersonasCuarto(vendedores.get(i).getDorms().get(j).getCantPersonasCuarto());
+                            comprador.getReservado().setuCompartida(vendedores.get(i).getDorms().get(j).getuCompartida());
+                            vendedores.get(i).getDorms().get(j).setDisponible(false);
+                            vendedores.get(i).getDorms().get(j).setReservado(true);
+                            System.out.println("Se te está enviando un correo indicando el dorm que has reservado ;)");
+                            mailer.enviarCorreo(comprador.getCorreo(), "Reservaste el Dorm: " + vendedores.get(i).getDorms().get(j).toString());
+                            System.out.println("Ahora se le está enviando un correo al dueño del dorm para que te pueda contactar ;)");
+                            mailer.enviarCorreo(vendedores.get(i).getCorreo(), "Un usuario esta interesado en tu Dorm: \n" + vendedores.get(i).getDorms().get(j).toString() +"\n"+ "Su numero de telefono es: "+ comprador.getNumero());
+                            System.out.println("--------------------------------------------");
+                            logIn = false;
+                        } else {
+                            System.out.println("Los índices están fuera de rango.");
+                        }
+                        }
+                        if(logIn = false){
+                            System.out.println("Lamentamos informarte que de momento no puedes hacer una reserva.");
+                            System.out.println("Todavía no contamos con dorms que cumplan con tus necesidades.");
+                        }
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Error: Ingrese un formato válido (#-#).");
+                    }  
+                } else{
+                    System.out.println("De momento no puedes hacer una reserva, pues no contamos con dorms que se adecúen a tus necesidades.\n" + "Vuelve en un tiempo!!");
+                }
+                System.out.println("Por favor, apache ENTER para continuar.");     
+                logIn = true;        
         }
         else if(opcion.equals("4")) {
             System.out.println(comprador.getReservado().toString());
             logIn = true;
+            System.out.println("Presione ENTER para continuar");
         }else if(opcion.equals("5")) {
             opcionValida = true;
             logIn = false;
