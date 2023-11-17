@@ -187,10 +187,12 @@ public class Dormbnb {
                 validacion1 = false;
                 String correo = scanner.next();
                 boolean systemON = true;
+                boolean validComprador = false;
                 for (int i = 0; i <compradores.size(); i++) {
                     if(systemON){
                         if (compradores.get(i).getCorreo().equals(correo)) {
                         validacion1 = true;
+                        validComprador = true;
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
                         contrasena = MD5Hash.getMd5(contrasena); 
@@ -206,12 +208,13 @@ public class Dormbnb {
                                     }
                             }
                             } else {
-                            System.out.println("Contrasena Incorrecta");          
+                            System.out.println("Contrasena Incorrecta");    
                 }}
 
                     }
                 }
-                for (int j = 0; j < vendedores.size(); j++) {
+                if(!validComprador){
+                    for (int j = 0; j < vendedores.size(); j++) {
                     if (vendedores.get(j).getCorreo().equals(correo)) {
                         System.out.println("Ingresa tu contraseña:");
                         String contrasena = scanner.next();
@@ -227,6 +230,8 @@ public class Dormbnb {
 
                     }}
                 }
+                }
+                
                 if(!validacion1){
                     System.out.println("No se ha encontrado un usuario con ese correo electrónico :(\n");
                 }
@@ -1050,6 +1055,8 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
         }else if(opcion.equals("5")) {
             opcionValida = true;
             logIn = false;
+            System.out.println("Que tenga un lindo día ;)");
+
         }
     return logIn;
     }
