@@ -911,7 +911,9 @@ static String SubMenuC = ("Bienvenido Comprador: \n"+
             "2. Ver Dorms recomendados\n"+
             "3. Reservar Dorm\n"+
             "4. Ver reserva\n"+
-            "5. Salir");
+            "5. Ver preferencias\n"+
+            "6. Editar preferencias\n"+
+            "7. Salir");
 
 public static boolean subMenuC(boolean logIn, Comprador comprador, String submenuC, ArrayList<Vendedor> vendedores){
     Mailer mailer = new Mailer();
@@ -1052,13 +1054,62 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
             System.out.println(comprador.getReservado().toString());
             logIn = true;
             System.out.println("Presione ENTER para continuar");
-        }else if(opcion.equals("5")) {
+        }
+        else if(opcion.equals("5")) {
+            comprador.toString();
+        }else if(opcion.equals("6")){
+            comprador.toString();
+            editarPreferencias(comprador);
+
+        }else if(opcion.equals("7")) {
             opcionValida = true;
             logIn = false;
             System.out.println("Que tenga un lindo día ;)");
 
         }
     return logIn;
+    }
+
+    public static void editarPreferencias(Comprador comprador){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escoge cual preferencia deseas modificar\n"+
+        "1. Ubicacion Deseada\n" + 
+        "2. Presupuesto\n" +
+                "3. Cantidad de Banos Deseados\n" + 
+                "4. Multi U\n" + 
+                "5. Compartir Cuarto\n" + 
+                "6. Numero de telefono\n" + 
+                "7. Universidad");
+        String opcion = scanner.nextLine();
+        if(opcion.equals("1")){
+            System.out.println("Ingrese la nueva ubicacion deseada:");
+            comprador.setUbicacionDeseada(seleccionarUbicacionDeseada());
+        }
+        if(opcion.equals("2")){
+            System.out.println("Ingrese su nuevo presupuesto:");
+            comprador.setPresupuesto(solicitarPresupuesto());
+        }
+        if(opcion.equals("3")){
+            System.out.println("Ingrese la nueva cantidad de banos deseados:");
+            comprador.setCantBanosDeseados(seleccionarCantidadbanosDeseada());
+        }
+        if(opcion.equals("4")){
+            System.out.println("Desea compartir con estudiantes de otras universidades:");
+            comprador.setCompartirU(establecersino());
+        }
+        if(opcion.equals("5")){
+            System.out.println("Desea compartir cuarto?:");
+            comprador.setCuartoCompartido(establecersino());
+        }
+        if(opcion.equals("6")){
+            System.out.println("Ingrese su nuevo numero de telefono:");
+            comprador.setNumero(obtenerNumeroTelefonico());
+        }
+        if(opcion.equals("7")){
+            System.out.println("Ingrese su nueva universidad:");
+            comprador.setUniversidad(seleccionarUniversidadDeseada());
+            
+        }
     }
 
 }

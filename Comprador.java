@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Comprador extends Usuario {
     //Atributos únicos de la clase comprador
     private String ubicacionDeseada;
@@ -8,6 +10,7 @@ public class Comprador extends Usuario {
     private String numero;
     private String universidad;//
     private Dorm reservado;
+    
     
     //Métodos propios de Comprador
     public Comprador(String nombre, String correo, String contrasena, String fechaNacimiento, String universidad, String ubicacionDeseada, float presupuesto, int cantBanosDeseados, String compartirU, String cuartoCompartido, String numero, Dorm dorm) {
@@ -103,8 +106,4 @@ public class Comprador extends Usuario {
         return nombre + " previamente definiste tus preferencias como: \n" + "Cantidad de baños deseados: " + cantBanosDeseados+"\n" + "Ubiación deseada: " + ubicacionDeseada +"\n" + "Tú presupuesto es de: " + presupuesto + "\n" + "Tu cuarto será compartido: " + cuartoCompartido + "\n" + "Convivirás con gente de otras universidades: " + compartirU;
     }
    
-    
-    
-    
-
 }
