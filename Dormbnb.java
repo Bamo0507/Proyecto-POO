@@ -1056,9 +1056,13 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
             System.out.println("Presione ENTER para continuar");
         }
         else if(opcion.equals("5")) {
-            comprador.toString();
+            System.out.println(comprador.toString());
+            System.out.println("Apacha ENTER para continuar");
         }else if(opcion.equals("6")){
-            comprador.toString();
+            System.out.println(comprador.toString());
+            System.out.println();
+            System.out.println("Apacha ENTER para continuar");
+            System.out.println("Hora de modificar tus preferencias!!!!");
             editarPreferencias(comprador);
 
         }else if(opcion.equals("7")) {
@@ -1110,6 +1114,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
             comprador.setUniversidad(seleccionarUniversidadDeseada());
             
         }
+        System.out.println("Apache ENTER para continuar");
     }
 
 }
