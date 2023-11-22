@@ -823,6 +823,7 @@ public class Dormbnb {
                     break;
                 case 3:
                     cantidadBanosDeseada = 2;
+                    break;
                 default:
                     System.out.println("Por favor, ingresa una opción válida. Solo se tienen dorms que tienen de 0 a 2 baños.\n");
                     break;
@@ -927,7 +928,7 @@ public static boolean subMenuC(boolean logIn, Comprador comprador, String submen
             for(int i = 0; i <vendedores.size(); i++){{
                 for (int j = 0; j < vendedores.get(i).getDorms().size(); j++){
                     if(vendedores.get(i).getDorms().get(j).isDisponible() == true){
-                        System.out.println("Coidgo: "+ i +"-" + j + " "+vendedores.get(i).getDorms().get(j).toString());
+                        System.out.println("Código: "+ i +"-" + j + " "+vendedores.get(i).getDorms().get(j).toString());
                         logIn = true;
                 }
                 }
