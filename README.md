@@ -13,3 +13,5 @@ Lo podrás encontrar en el extremo izquierdo hacia abajo.
 
 Si llegas a tener problema utilizando este método puedes probar descargar el ZIP que se encuentra en el repositorio.
 Este contiene las tres librerías necesarias.
+
+En el apartado de "Explorer" de Visual Studio Code (ya que se tengan las 3 librerías necesarias descargadas), hay que dirigirse hasta el apartado de "Referenced Libraries" y ahí importarlas.
